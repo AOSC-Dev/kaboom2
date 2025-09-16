@@ -1,0 +1,20 @@
+linux headers
+glibc
+m4
+ncurses
+readline
+bash
+coreutils
+diffutils
+file
+findutils
+gawk
+grep
+gzip
+make
+patch
+sed
+tar
+xz
+binutils
+gcc
