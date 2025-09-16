@@ -1,6 +1,6 @@
 VER=3.8.2
 SRCS=(
-	"tbl	https://ftp.gnu.org/gnu/bison/bison-${VER}.tar.xz	default"
+	"tbl	https://ftpmirror.gnu.org/gnu/bison/bison-${VER}.tar.xz	default"
 )
 CHKSUMS=(
 	"sha256 9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"

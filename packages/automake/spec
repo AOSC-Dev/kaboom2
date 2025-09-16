@@ -1,6 +1,6 @@
 VER=1.18
 SRCS=(
-	"git	https://git.savannah.gnu.org/git/automake.git	default	tags/v${VER}"
+	"git	https://https.git.savannah.gnu.org/git/automake.git	default	tags/v${VER}"
 )
 CHKSUMS=(
 	"SKIP"
