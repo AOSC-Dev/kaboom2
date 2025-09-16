@@ -1,0 +1,8 @@
+VER=3.7.8
+SRCS=(
+	"tbl	https://www.libarchive.org/downloads/libarchive-${VER}.tar.gz	default"
+)
+CHKSUMS=(
+	"sha256 a123d87b1bd8adb19e8c187da17ae2d957c7f9596e741b929e6b9ceefea5ad0f"
+)
+CHKUPDATE="anitya::id=1558"

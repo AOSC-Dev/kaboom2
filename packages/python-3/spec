@@ -1,0 +1,8 @@
+VER=3.10.18
+SRCS=(
+	"tbl	https://www.python.org/ftp/python/${VER}/Python-${VER}.tar.xz	default"
+)
+CHKSUMS=(
+	"sha256 ae665bc678abd9ab6a6e1573d2481625a53719bc517e9a634ed2b9fefae3817f"
+)
+CHKUPDATE="anitya::id=13254"

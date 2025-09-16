@@ -1,0 +1,8 @@
+VER=2.7.0
+SRCS=(
+	"tbl	https://github.com/libexpat/libexpat/releases/download/R_2_7_0/expat-${VER}.tar.xz	default"
+)
+CHKSUMS=(
+	"sha256 25df13dd2819e85fb27a1ce0431772b7047d72af81ae78dc26b4c6e0805f48d1"
+)
+CHKUPDATE="anitya::id=770"

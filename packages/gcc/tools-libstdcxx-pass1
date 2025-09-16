@@ -1,0 +1,14 @@
+#!/bin/bash
+pushd "$PKGNAME-$PKGVER"/libstdc++-v3
+md build-"$KABOOM_ARCH"
+
+expand_arch_def
+configure_native2 \
+	--disable-multilib \
+	--disable-nls \
+	--disable-libstdcxx-pch \
+	--with-gxx-include-dir="$KABOOM_TOOLCHAIN_DIR"/"$KABOOM_TARGET_TRIPLE"/include/c++
+
+make_build
+make_install_native
+popd

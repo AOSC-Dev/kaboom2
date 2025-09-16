@@ -1,0 +1,8 @@
+VER=10.46
+SRCS=(
+	"git	https://github.com/PCRE2Project/pcre2	default	tags/pcre2-${VER}"
+)
+CHKSUMS=(
+	"SKIP"
+)
+CHKUPDATE="anitya::id=5832"

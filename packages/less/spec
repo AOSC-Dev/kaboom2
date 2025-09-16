@@ -1,0 +1,8 @@
+VER=679
+SRCS=(
+	"tbl	http://www.greenwoodsoftware.com/less/less-${VER}.tar.gz	default"
+)
+CHKSUMS=(
+	"sha256 9b68820c34fa8a0af6b0e01b74f0298bcdd40a0489c61649b47058908a153d78"
+)
+CHKUPDATE="anitya::id=1550"

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+if ab_match_arch ia64 ; then
+	pushd glibc-ia64.git
+else
+	pushd "$PKGNAME"-"$PKGVER"
+fi
+md build
+expand_arch_def
+configure_native2 \
+    --enable-kernel=4.19.0 \
+    --with-headers=$KABOOM_CUR_SYSROOT/usr/include \
+    libc_cv_slibdir=/usr/lib || \
+    abdie "Failed to run configure for glibc-pass1: $?"
+
+abinfo "glibc-pass1: Building ..."
+make_build || \
+    abdie "Failed to build glibc-pass1: $?"
+
+abinfo "glibc-pass1: Installing ..."
+make_install_native || \
+    abdie "Failed to install glibc-pass1: $?"
+
+abinfo "glibc-pass1: Adjusting ldd ..."
+# From Linux from Scratch:
+#
+# Fix a hard coded path to the executable loader in the ldd script.
+sed -e '/RTLDLIST=/s@/usr@@g' \
+    -i "$KABOOM_CUR_SYSROOT"/usr/bin/ldd || \
+    abdie "Failed to adjust ldd: $?"
+
+abinfo "glibc-pass1: Finalising limits.h installation (gcc-pass1) ..."
+gcc_libexecdir="$($KABOOM_TARGET_TRIPLE-gcc -print-prog-name=cc1)"
+gcc_libexecdir="$(dirname $gcc_libexecdir)"
+"$gcc_libexecdir"/install-tools/mkheaders || \
+    abdie "Failed to finalise limits.h installation (gcc-pass1): $?"
+
+abinfo "glibc-pass1: Installing finalised limits.h (gcc-pass1) ..."
+cp -v `dirname $($KABOOM_TARGET_TRIPLE-gcc -print-libgcc-file-name)`/include-fixed/* \
+    `dirname $($KABOOM_TARGET_TRIPLE-gcc -print-libgcc-file-name)`/include/ || \
+    abdie "Failed to install finalised limits.h (gcc-pass1): $?"

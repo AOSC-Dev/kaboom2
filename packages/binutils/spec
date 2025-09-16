@@ -1,0 +1,8 @@
+VER=2.45
+SRCS=(
+	"tbl	https://mirrors.tuna.tsinghua.edu.cn/gnu/binutils/binutils-${VER}.tar.xz	default"
+)
+CHKSUMS=(
+	"sha256 c50c0e7f9cb188980e2cc97e4537626b1672441815587f1eab69d2a1bfbef5d2"
+)
+CHKUPDATE="anitya::id=7981"

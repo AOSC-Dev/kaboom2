@@ -1,0 +1,144 @@
+#!/bin/bash
+set -e
+shopt -s extglob
+# Find the kaboom2 top directory
+KABOOM_TOP="$PWD"
+detect_top() {
+	local _top_dir="$1"
+	local i=1
+	while ! [ "/$_top_dir" -ef "/" ] ; do
+		if [ -x "$_top_dir"/kaboom2 ] ; then
+			echo "$_top_dir"
+			return 0
+		fi
+		_top_dir="${_top_dir%/*}"
+	done
+	[ -d /kaboom2 ] && echo "$_top_dir"
+}
+export KABOOM_TOP="$(detect_top $PWD)"
+
+KABOOM_ERROR=0
+
+KABOOM_MODE=full
+KABOOM_CONTINUE=
+KABOOM_ARCHIVE=xz
+
+usage() {
+	cat << EOF
+Usage: $0 [-m|--mode MODE] [-c|--continue CONTINUE] ARCH
+EOF
+}
+
+OPTS="$(getopt -o "m:c:" --long "mode:,continue-from:" -n "$0" -- "$@")"
+if [ "$?" != 0 ] ; then
+	usage
+	exit 1
+fi
+
+source "$KABOOM_TOP"/lib/base.bash
+
+eval set -- "$OPTS"
+unset OPTS
+while true ; do
+	case "$1" in
+		-m|--mode)
+			case "$2" in
+				stage0|stage1)
+					;;
+				*)
+					echo "[!!!] Invalid stage specification."
+					exit 1
+					;;
+			esac
+			export KABOOM_MODE="$2"
+			shift 2
+			continue
+			;;
+		-c|--continue-from)
+			export KABOOM_CONTINUE="$2"
+			shift 2
+			continue
+			;;
+		-a|--archive)
+			case "$2" in
+				xz|squashfs|gz)
+					export KABOOM_ARCHIVE="$2"
+					;;
+				*)
+					echo "[!!!] Invalid archive program."
+					exit 1
+					;;
+			esac
+			shift 2
+			continue
+			;;
+		--)
+			shift
+			break
+			;;
+		*)
+			echo "[!!!] Invalid usage."
+			usage
+			exit 1
+			;;
+	esac
+done
+
+if [ -n "$KABOOM_CONTINUE" ] ; then
+	export KABOOM_CONTINUE_STAGE=${KABOOM_CONTINUE%%-*}
+	export KABOOM_CONTINUE_PACKAGE=${KABOOM_CONTINUE#*-}
+	if [ "$KABOOM_CONTINUE_STAGE" = "$KABOOM_CONTINUE_PACKAGE" ] ; then
+		abdie "Invalid continue specification: expected STAGE-PKGNAME, received ‘$KABOOM_CONTINUE’"
+	fi
+	if ! [ -e "$KABOOM_TOP"/sequence/"$KABOOM_CONTINUE_STAGE" ] ; then
+		abdie "Stage ‘$KABOOM_CONTINUE_STAGE’ does not exist. Aborting."
+	fi
+	abinfo "Continuing at stage ‘$KABOOM_CONTINUE_STAGE’, package ‘$KABOOM_CONTINUE_PACKAGE’"
+	export KABOOM_SKIP_DL_SOURCES=1
+fi
+
+# Test if essential variables are set.
+if [ -z "${1}" ]; then
+	echo -e '[!!!] Please specify an architecture to bootstrap AOSC OS for!'
+	usage
+	exit 1
+fi
+
+# Pass $1 to $KABOOM_ARCH, used by other scripts.
+export KABOOM_ARCH="${1}"
+
+# Check if KABOOM_ARCH is valid.
+if [ ! -e "$KABOOM_TOP"/targets/"$KABOOM_ARCH" ] ; then
+	aberr "The architecture specified is not yet supported by Kaboom. Please consider adapting Kaboom to this architecture."
+fi
+
+export KABOOM_DL_DIR="$KABOOM_TOP"/sources
+export KABOOM_BUILD_DIR="$KABOOM_TOP"/build-"$KABOOM_ARCH"
+export KABOOM_TOOLCHAIN_PREFIX="$KABOOM_TOP"/toolchain-"$KABOOM_ARCH"
+export KABOOM_TOOLCHAIN_DIR="$KABOOM_TOP"/toolchain-"$KABOOM_ARCH"
+export KABOOM_STAGE0_SYSROOT="$KABOOM_TOP"/stage0-"$KABOOM_ARCH"
+export KABOOM_STAGE1_SYSROOT="$KABOOM_TOP"/stage1-"$KABOOM_ARCH"
+
+KABOOM_HOST_ARCH=$(dpkg --print-architecture)
+KABOOM_HOST_TRIPLE="$(dirname $(gcc --print-prog-name=cc1))"
+KABOOM_HOST_TRIPLE="$(basename $(realpath $KABOOM_HOST_TRIPLE/..))"
+export KABOOM_HOST_TRIPLE KABOOM_HOST_ARCH
+
+abinfo "Host architecture: $KABOOM_HOST_ARCH"
+abinfo "Host system triplet: $KABOOM_HOST_TRIPLE"
+abinfo "Since Kaboom 2, the stage 0 and stage 1 will always be cross-compiled."
+
+export KABOOM_CROSS_STAGE1=1
+
+mkdir -p "$KABOOM_DL_DIR"
+mkdir -p "$KABOOM_TOOLCHAIN_DIR"
+mkdir -p "$KABOOM_BUILD_DIR"
+
+source "$KABOOM_TOP"/targets/"$KABOOM_ARCH"
+source "$KABOOM_TOP"/lib/arch.bash
+source "$KABOOM_TOP"/lib/build.bash
+source "$KABOOM_TOP"/lib/spec.bash
+
+for proc in $(find "$KABOOM_TOP"/proc -type f -name '*.bash' | sort -n) ; do
+	source "$proc" || abdie "Process $(basename $proc) failed."
+done

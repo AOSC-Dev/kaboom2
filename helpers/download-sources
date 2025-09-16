@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+if [ -z "$KABOOM_TOP" ] || [ -z "$KABOOM_ARCH" ] ; then
+	echo "[!!!!] This is a helper program meant to be used with kaboom2."
+	exit 1
+fi
+
+source "$KABOOM_TOP"/lib/base.bash
+source "$KABOOM_TOP"/lib/spec.bash
+
+# TODO use GNU parallel.
+for dir in $(find "$KABOOM_TOP"/packages -maxdepth 1 -mindepth 1 -type d) ; do
+	if [ -f "$dir"/spec ] ; then
+		p=$(basename $dir)
+		abinfo "Downloading sources for $p ..."
+		for_each_srcs "$dir"/spec verify_and_download || {
+			abdie "Failed to verify the source file integrity for ‘$p’."
+		}
+	fi
+done

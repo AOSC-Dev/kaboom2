@@ -1,0 +1,8 @@
+VER=0.191
+SRCS=(
+	"tbl	https://sourceware.org/elfutils/ftp/${VER}/elfutils-${VER}.tar.bz2	default"
+)
+CHKSUMS=(
+	"sha256 df76db71366d1d708365fc7a6c60ca48398f14367eb2b8954efc8897147ad871"
+)
+CHKUPDATE="anitya::id=5679"

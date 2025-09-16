@@ -1,0 +1,13 @@
+binutils pass1
+gcc pass1
+linux headers
+glibc
+gcc libstdcxx-pass1
+binutils pass2
+gcc pass2
+# A same version of Python must exist if we are cross compiling Python.
+python
+# Same for file.
+file
+# Same for gettext.
+gettext

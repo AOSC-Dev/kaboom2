@@ -1,0 +1,8 @@
+VER=3.31.6
+SRCS=(
+	"tbl	https://cmake.org/files/v3.31/cmake-${VER}.tar.gz	default"
+)
+CHKSUMS=(
+	"sha256 653427f0f5014750aafff22727fb2aa60c6c732ca91808cfb78ce22ddd9e55f0"
+)
+CHKUPDATE="anitya::id=306"

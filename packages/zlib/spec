@@ -1,0 +1,8 @@
+VER=2.2.4
+SRCS=(
+	"git	https://github.com/zlib-ng/zlib-ng.git	default	tags/${VER}"
+)
+CHKSUMS=(
+	"SKIP"
+)
+CHKUPDATE="anitya::id=115592"

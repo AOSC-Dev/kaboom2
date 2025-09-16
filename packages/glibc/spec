@@ -1,0 +1,17 @@
+VER=2.42
+SRCS=(
+	"tbl	https://ftpmirror.gnu.org/gnu/glibc/glibc-${VER}.tar.xz	default"
+)
+CHKSUMS=(
+	"sha256 d1775e32e4628e64ef930f435b67bb63af7599acb6be2b335b9f19f16509f17f"
+)
+
+# NOTE: IA-64 uses a downstream fork.
+SRCS__IA64=(
+	"git	https://github.com/linux-ia64/glibc-ia64.git	glibc-ia64.git	release/${VER}/master-w-ia64"
+)
+CHKSUMS__IA64=(
+	"SKIP"
+)
+
+CHKUPDATE="anitya::id=5401"

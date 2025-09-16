@@ -1,0 +1,10 @@
+VER=8.6
+SRCS=(
+	"git	git://git.savannah.gnu.org/nano.git	default	tags/v${VER}"
+	"git	https://github.com/Quentium-Forks/nanorc	nanorc	tags/2024.1.16"
+)
+CHKSUMS=(
+	"SKIP"
+	"SKIP"
+)
+CHKUPDATE="anitya::id=2046"

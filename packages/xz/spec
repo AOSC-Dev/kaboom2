@@ -1,0 +1,8 @@
+VER=5.8.1
+SRCS=(
+	"tbl	https://tukaani.org/xz/xz-${VER}.tar.xz	default"
+)
+CHKSUMS=(
+	"sha256 0b54f79df85912504de0b14aec7971e3f964491af1812d83447005807513cd9e"
+)
+CHKUPDATE="anitya::id=5277"
