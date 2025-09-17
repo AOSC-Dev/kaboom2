@@ -1,6 +1,15 @@
 #!/bin/bash
 
 pushd "$PKGNAME-$PKGVER"
+
+if ab_match_arch ia64 ; then
+	abinfo "Applying patches ..."
+	METADIR="$(get_pkgmetadata_dir)"
+	for patch in "$METADIR"/*.patch.ia64 ; do
+		patch -Np1 < "$patch"
+	done
+fi
+
 md build-"$KABOOM_ARCH"
 expand_arch_def
 configure_tools \
