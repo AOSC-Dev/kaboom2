@@ -22,6 +22,17 @@ has_arch_specific_srcs() {
 	[ -n "${!var}" ]
 }
 
+get_pkgmetadata_dir() {
+	local pkgname="$PKGNAME"
+	if [ -z "$pkgname" ] ; then
+		if [ -z "$1" ] ; then
+			abdie "$0: Invalid usage"
+		fi
+		pkgname="$1"
+	fi
+	realpath "$KABOOM_TOP/packages/$pkgname"
+}
+
 # $1: full path to the spec file.
 # $2: command to execute. The commans will be executed in a subshell, arguments are:
 # 	COMMAND srctype srcname url chksum_algo chksum_name
