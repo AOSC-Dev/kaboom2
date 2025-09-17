@@ -11,4 +11,9 @@ configure_native2 \
 
 make_build
 make_install_native
+abinfo "Moving C++ headers into the toolchain ..."
+mv -v "$KABOOM_TOOLCHAIN_SYSROOT"/"$KABOOM_TOOLCHAIN_DIR"/"$KABOOM_TARGET_TRIPLE"/include/c++ \
+	"$KABOOM_TOOLCHAIN_DIR"/"$KABOOM_TARGET_TRIPLE"/include/c++
+
+rm -rv "$KABOOM_TOOLCHAIN_SYSROOT"/"$KABOOM_TOOLCHAIN_DIR"/
 popd
