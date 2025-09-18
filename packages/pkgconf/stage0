@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+pushd pkgconf.git
+abinfo "Generating configure script ..."
+./autogen.sh || abdie "Failed to generate configure script."
+
+md build
+configure_native2 \
+	--disable-shared
+make_build
+make_install_native
+
+abinfo "Installing pkg-config symlink ..."
+ln -sfv pkgconf "$KABOOM_TOOLCHAIN_SYSROOT"/usr/bin/pkg-config

@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+
+pushd pkgconf.git
+abinfo "Generating configure script ..."
+./autogen.sh || abdie "Failed to generate configure script."
+
+md build
+configure_tools \
+	--disable-shared
+make_build
+make_install_tools
+
+abinfo "Creating ‘$KABOOM_TARGET_TRIPLE-pkg-config’ ..."
+cat > "$KABOOM_TOOLCHAIN_PREFIX"/bin/"$KABOOM_TARGET_TRIPLE"-pkg-config << 'EOF'
+#!/bin/bash
+TOOLCHAIN_PREFIX="$(realpath $0)"
+TOOLCHAIN_PREFIX="$(dirname $TOOLCHAIN_PREFIX)"
+TOOLCHAIN_PREFIX="$(realpath $TOOLCHAIN_PREFIX/..)"
+
+env \
+	PKG_CONFIG_LIBDIR="$TOOLCHAIN_PREFIX"/sysroot/usr/lib/pkgconfig \
+	PKG_CONFIG_SYSROOT_DIR="$TOOLCHAIN_PREFIX" \
+	PKG_CONFIG_SYSTEM_INCLUDE_PATH="$TOOLCHAIN_PREFIX"/sysroot/usr/include \
+	PKG_CONFIG_SYSTEM_LIBRARY_PATH="$TOOLCHAIN_PREFIX"/sysroot/usr/lib \
+	"$TOOLCHAIN_PREFIX"/bin/pkgconf "$@"
+EOF
+chmod a+x "$KABOOM_TOOLCHAIN_PREFIX"/bin/"$KABOOM_TARGET_TRIPLE"-pkg-config
+ln -sf "$KABOOM_TARGET_TRIPLE"-pkg-config "$KABOOM_TOOLCHAIN_PREFIX"/bin/"$KABOOM_TARGET_TRIPLE"-pkgconf

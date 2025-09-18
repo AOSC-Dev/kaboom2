@@ -1,0 +1,8 @@
+VER=2.5.1
+SRCS=(
+	"git https://github.com/pkgconf/pkgconf.git	default	pkgconf-${VER}"
+)
+
+CHKSUMS=(
+	"SKIP"
+)
