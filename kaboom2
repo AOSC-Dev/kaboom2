@@ -85,10 +85,10 @@ while true ; do
 done
 
 if [ -n "$KABOOM_CONTINUE" ] ; then
-	export KABOOM_CONTINUE_STAGE=${KABOOM_CONTINUE%%-*}
-	export KABOOM_CONTINUE_PACKAGE=${KABOOM_CONTINUE#*-}
+	export KABOOM_CONTINUE_STAGE=${KABOOM_CONTINUE%%/*}
+	export KABOOM_CONTINUE_PACKAGE=${KABOOM_CONTINUE#*/}
 	if [ "$KABOOM_CONTINUE_STAGE" = "$KABOOM_CONTINUE_PACKAGE" ] ; then
-		abdie "Invalid continue specification: expected STAGE-PKGNAME, received ‘$KABOOM_CONTINUE’"
+		abdie "Invalid continue specification: expected STAGE/PKGNAME, received ‘$KABOOM_CONTINUE’"
 	fi
 	if ! [ -e "$KABOOM_TOP"/sequence/"$KABOOM_CONTINUE_STAGE" ] ; then
 		abdie "Stage ‘$KABOOM_CONTINUE_STAGE’ does not exist. Aborting."
