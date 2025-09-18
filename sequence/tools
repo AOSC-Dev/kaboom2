@@ -1,13 +1,17 @@
 binutils pass1
+# Just enough compiler to build glibc
 gcc pass1
 linux headers
 glibc
 gcc libstdcxx-pass1
 binutils pass2
+# Rebuild GCC with now-present glibc to get a mostly full-featured one
 gcc pass2
 # A same version of Python must exist if we are cross compiling Python.
-python
+python-3
 # Same for file.
 file
 # Same for gettext.
 gettext
+# For obtaining runtime dependencies for target.
+pkgconf
