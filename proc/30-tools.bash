@@ -1,6 +1,12 @@
 export KABOOM_CUR_STAGE=tools
 export KABOOM_CUR_SYSROOT="$KABOOM_STAGE0_SYSROOT"
 
+if [ -n "$KABOOM_CONTINUE_STAGE" ] && \
+	[ "$KABOOM_CONTINUE_STAGE" != "$KABOOM_CUR_STAGE" ] ; then
+	abinfo "$KABOOM_CUR_STAGE: Continuing to stage ‘$KABOOM_CONTINUE_STAGE’."
+	return 0
+fi
+
 echo "
 ========================================
 Prepairing stage 0 sysroot directory structure
@@ -27,7 +33,6 @@ if bool "$KABOOM_LINK_LIB64" ; then
 fi
 
 ln -snfv ../stage0-"$KABOOM_TARGET_ARCH" "$KABOOM_TOOLCHAIN_SYSROOT"
-
 
 echo "
 ========================================
