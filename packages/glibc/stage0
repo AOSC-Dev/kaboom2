@@ -28,3 +28,10 @@ abinfo "glibc-pass1: Adjusting ldd ..."
 sed -e '/RTLDLIST=/s@/usr@@g' \
     -i "$KABOOM_CUR_SYSROOT"/usr/bin/ldd || \
     abdie "Failed to adjust ldd: $?"
+
+abinfo "Generating locales ..."
+METADIR="$(get_pkgmetadata_dir)"
+make_build -f "$METADIR"/Makefile.locales \
+	SYSROOT="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" \
+	TMPROOT="$PWD/tmproot" \
+	GLIBC_METADIR="$METADIR"

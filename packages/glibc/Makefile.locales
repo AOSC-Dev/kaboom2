@@ -1,0 +1,59 @@
+#!/bin/make -f
+# Locale generation routines. We only does take the endianness into account.
+# And we probably only generating locales with UTF-8 charmaps, since we are
+# bootstrapping.
+
+# To update this file, run this line at the root of the glibc source:
+#
+#   tail -n+4 localedata/SUPPORTED | sed -e 's|/.*||g' -e 's|\..*||g' | sort | uniq
+#
+SRC_LOCALESDIR := $(GLIBC_SRC)/localedata/locales
+
+LOCALES = $(shell cat $(GLIBC_METADIR)/locales)
+
+LOCALEDEF ?= localedef
+
+ENDIAN ?= little
+
+$(SYSROOT)/usr/lib/locale/locale-archive: $(TMPROOT)/usr/lib/locale/locale-archive
+	@install -Dvm644 $(TMPROOT)/usr/lib/locale/locale-archive \
+		$(SYSROOT)/usr/lib/locale/locale-archive ; \
+	rm -rf $(TMPROOT)
+
+check:
+	@if [ -z "$(TMPROOT)" ] || [ -z "$(SYSROOT)" ] || \
+		[ -z "$(GLIBC_METADIR)" ] ; then \
+		echo "TMPROOT or SYSROOT missing."; \
+		exit 1 ; \
+	fi
+.PHONY: check
+
+localedir: check
+	mkdir -pv $(TMPROOT)/usr/lib/locale
+
+.PHONY: localedir
+
+$(LOCALES): | localedir
+	@I18NPATH=$(SYSROOT)/usr/share/i18n:/usr/share/i18n \
+	$(LOCALEDEF) \
+		--prefix=$(TMPROOT) \
+		--$(ENDIAN)-endian \
+		--no-archive \
+		-i $@ \
+		-f UTF-8 \
+		$@ ; \
+	echo "Generated locale ‘$@’"
+
+.PHONY: $(LOCALES)
+
+$(TMPROOT)/usr/lib/locale/locale-archive: $(LOCALES)
+	@echo "Generating archive ..." ; \
+	find $(TMPROOT)/usr/lib/locale/ -mindepth 1 -maxdepth 1 -type d \
+	| sort \
+	| xargs \
+		$(LOCALEDEF) \
+			--quiet \
+			--prefix=$(TMPROOT) \
+			--$(ENDIAN)-endian \
+			--add-to-archive ; \
+	echo "Done generating archive." ; \
