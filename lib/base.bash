@@ -27,9 +27,9 @@ ab_match_arch() {
 		[ "$1" = "retro" ] ; then
 		local all_arch var="$1[*]"
 		all_arch=" ${!var} "
-		[ "${all_arch// KABOOM_ARCH }" != "${all_arch}" ]
+		[ "${all_arch// $KABOOM_TARGET_ARCH /}" != "${all_arch}" ]
 	else
-		[ "$1" = "$KABOOM_ARCH" ]
+		[ "$1" = "$KABOOM_TARGET_ARCH" ]
 	fi
 }
 
