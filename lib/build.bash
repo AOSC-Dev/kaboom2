@@ -26,21 +26,33 @@ KABOOM_AUTOTOOLS_TOOLS_DEF2=(
 	"--host=$KABOOM_HOST_TRIPLE"
 	"--build=$KABOOM_HOST_TRIPLE"
 	"--prefix=$KABOOM_TOOLCHAIN_DIR"
-	"--with-sysroot=$KABOOM_TOOLCHAIN_SYSROOT"
 	"--enable-year2038"
 	"--enable-largefile"
 )
 
 KABOOM_AUTOTOOLS_NATIVE_DEF=(
 	"--host=$KABOOM_TARGET_TRIPLE"
+	"--target=$KABOOM_TARGET_TRIPLE"
 	"--build=$KABOOM_HOST_TRIPLE"
 	"--prefix=/usr"
 	"--enable-year2038"
 	"--enable-largefile"
 )
+
+KABOOM_AUTOTOOLS_NATIVE_DEF2=(
+	"--host=$KABOOM_TARGET_TRIPLE"
+	"--build=$KABOOM_HOST_TRIPLE"
+	"--prefix=/usr"
+	"--enable-year2038"
+	"--enable-largefile"
+)
+
 if bool "$KABOOM_CROSS_STAGE1" ; then
 	# NOTE: some packages may require this while cross compiling.
 	KABOOM_AUTOTOOLS_NATIVE_DEF+=(
+		"--with-sysroot=$KABOOM_TOOLCHAIN_SYSROOT"
+	)
+	KABOOM_AUTOTOOLS_NATIVE_DEF2+=(
 		"--with-sysroot=$KABOOM_TOOLCHAIN_SYSROOT"
 	)
 fi
@@ -85,6 +97,13 @@ configure_tools() {
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
 }
 
+configure_tools2() {
+	_configure "${KABOOM_AUTOTOOLS_TOOLS_DEF2[@]}" \
+		"${ARCH_DEF[@]}" \
+		"$@" || abdie \
+		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
+}
+
 configure_native() {
 	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF[@]}" \
 		"${ARCH_DEF[@]}" \
@@ -94,7 +113,7 @@ configure_native() {
 
 # For applications within the toolchain prefix.
 configure_native2() {
-	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF[@]}" \
+	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF2[@]}" \
 		"${ARCH_DEF[@]}" \
 		"$@" || abdie \
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
@@ -120,7 +139,7 @@ make_install_tools() {
 }
 
 make_install_native() {
-	make install DESTDIR="$KABOOM_CUR_SYSROOT" "$@" || \
+	make install DESTDIR="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" "$@" || \
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ into current system root."
 }
 
