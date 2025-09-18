@@ -1,0 +1,11 @@
+#!/bin/bash
+pushd "$PKGNAME-$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+configure_tools \
+	--disable-nls \
+	--disable-werror \
+	--enable-gprofing=no
+
+make_build
+make_install_tools
+popd

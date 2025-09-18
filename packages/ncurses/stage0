@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+pushd "$PKGNAME"-"$PKGVER"
+
+METADIR=$(get_pkgmetadata_dir)
+for patch in "$METADIR"/*.patch ; do
+	abinfo "Applying ‘$(basename $patch)’ ..."
+	patch -Np1 < "$patch" || abdie "Failed to apply patch ‘$(basename $patch)’."
+done
+
+md build-"$KABOOM_TARGET_ARCH"
+configure_native2 \
+	--with-shared \
+	--with-normal \
+	--with-cxx-shared \
+	--without-debug \
+	--without-ada \
+	--without-tests \
+	--disable-stripping \
+	--enable-widec \
+	--enable-pc-files \
+	--with-pkg-config-libdir=/usr/lib/pkgconfig \
+	--enable-ext-colors \
+	--enable-ext-mouse \
+	--enable-ext-putwin \
+	--with-versioned-syms \
+	cf_cv_header_stdbool_h=1
+
+make_build
+make_install_native

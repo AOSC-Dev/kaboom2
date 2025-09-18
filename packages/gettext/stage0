@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+abinfo "Fixing checks for cross-compilation ..."
+cat > config.cache << EOF
+am_cv_func_iconv_works=yes
+gl_cv_func_wcwidth_works=yes
+gt_cv_func_printf_posix=yes
+gt_cv_int_divbyzero_sigfpe=yes
+EOF
+
+configure_native2 \
+	--disable-openmp \
+	--disable-java \
+	--disable-native-java \
+	--disable-csharp \
+	--without-emacs \
+	--with-included-gettext \
+	--disable-modula2
+
+make_build
+make_install_native

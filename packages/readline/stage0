@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+pushd "$PKGNAME"-"$PKGVER"
+
+PKGMETADIR=$(get_pkgmetadata_dir)
+for patch in $PKGMETADIR/*.patch ; do
+	abinfo "Applying patch $(basename $patch) ..."
+	patch -Np1 < $patch
+done
+
+md build-"$KABOM_TARGET_ARCH"
+
+configure_native2 \
+	--enable-multibyte \
+	--enable-shared \
+	--disable-install-examples \
+	--with-curses
+
+make_build
+make_install_native

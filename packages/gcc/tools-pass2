@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Re-compile a version of GCC that is (mostly) full-featured.
+pushd "$PKGNAME-$PKGVER"
+
+if ab_match_arch ia64 ; then
+	abinfo "Applying patches ..."
+	METADIR="$(get_pkgmetadata_dir)"
+	for patch in "$METADIR"/*.patch.ia64 ; do
+		patch -Np1 < "$patch"
+	done
+fi
+
+md build-"$KABOOM_TARGET_ARCH"
+expand_arch_def
+configure_tools \
+	--enable-default-pie \
+	--enable-default-ssp \
+	--disable-nls \
+	--enable-shared \
+	--disable-multilib \
+	--enable-threads \
+	--enable-languages="c,c++"
+make_build
+make_install_tools
+# From Linux From Scratch:
+#
+# This build of GCC has installed a couple of internal system headers.
+# Normally one of them, limits.h, would in turn include the corresponding
+# system limits.h header, in this case, $LFS/usr/include/limits.h. However,
+# at the time of this build of GCC $LFS/usr/include/limits.h does not exist,
+# so the internal header that has just been installed is a partial,
+# self-contained file and does not include the extended features of the system
+# header. This is adequate for building Glibc, but the full internal header
+# will be needed later. Create a full version of the internal header using a
+# command that is identical to what the GCC build system does in normal
+# circumstances.
+pushd ..
+cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+    `dirname $($KABOOM_TARGET_TRIPLE-gcc -print-libgcc-file-name)`/install-tools/include/limits.h || \
+    abdie "Failed to generate limits.h for gcc-pass1: $?"
+popd
+popd

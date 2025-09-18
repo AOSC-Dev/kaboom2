@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+pushd "$PKGNAME-$PKGVER"
+md build-"$KABOOM_HOST_TRIPLE"
+configure_tools2
+make_build
+make_install_tools
+
+popd

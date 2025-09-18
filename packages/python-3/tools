@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+pushd Python-$PKGVER
+md build-"$KABOOM_HOST_TRIPLE"
+
+configure_tools2 \
+	--with-ensurepip
+make_build
+make_install_tools
+popd

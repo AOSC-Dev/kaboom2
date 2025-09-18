@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+configure_native2
+make_build
+make_install_native

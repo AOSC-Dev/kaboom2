@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+pushd linux-*
+false
+
+make ARCH="$KABOOM_KERNEL_ARCH" \
+	CROSS_COMPILE="$KABOOM_TARGET_TRIPLE"- \
+	headers
+
+find usr/include -type f \
+	! -name "*.h" -delete
+
+mkdir -pv "$KABOOM_STAGE0_SYSROOT"/usr
+cp -rv usr/include "$KABOOM_STAGE0_SYSROOT"/usr/

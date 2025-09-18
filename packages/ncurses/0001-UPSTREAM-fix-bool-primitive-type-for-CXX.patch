@@ -1,0 +1,25 @@
+From 85afd0fb59d38c426886983f5b55d05f33e290d9 Mon Sep 17 00:00:00 2001
+From: Xinhui Yang <cyan@cyano.uk>
+Date: Thu, 18 Sep 2025 10:58:19 +0800
+Subject: [PATCH] UPSTREAM: fix bool primitive type for CXX
+
+---
+ include/curses.h.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/curses.h.in b/include/curses.h.in
+index 8cfa0b9..a98e012 100644
+--- a/include/curses.h.in
++++ b/include/curses.h.in
+@@ -296,7 +296,7 @@ typedef @cf_cv_type_of_bool@ NCURSES_BOOL;
+ #include <stdbool.h>
+ /* use whatever the C compiler decides bool really is */
+ #define NCURSES_BOOL bool
+-#else
++#elif !defined(__cplusplus) && !@cf_cv_builtin_bool@
+ /* there is no predefined bool - use our own */
+ #undef bool
+ #define bool NCURSES_BOOL
+-- 
+2.51.0
+
