@@ -30,6 +30,12 @@ KABOOM_KERNEL_ARCH=ia64
 # Whether to symlink lib64.
 KABOOM_LINK_LIB64=1
 
+# Workaround a warning in glibc for ia64, since they are using some
+# bootstrapping implementations.
 GLIBC_TOOLS_DEF__IA64=(
+	"--disable-werror"
+)
+
+GLIBC_STAGE0_DEF__IA64=(
 	"--disable-werror"
 )
