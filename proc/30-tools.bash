@@ -26,7 +26,7 @@ if bool "$KABOOM_LINK_LIB64" ; then
 	ln -snfv lib "$KABOOM_CUR_SYSROOT"/usr/lib64
 fi
 
-ln -snfv ../stage0-"$KABOOM_ARCH" "$KABOOM_TOOLCHAIN_SYSROOT"
+ln -snfv ../stage0-"$KABOOM_TARGET_ARCH" "$KABOOM_TOOLCHAIN_SYSROOT"
 
 
 echo "

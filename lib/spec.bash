@@ -18,7 +18,7 @@
 # )
 
 has_arch_specific_srcs() {
-	local var="SRCS_${KABOOM_ARCH^^}[*]"
+	local var="SRCS_${KABOOM_TARGET_ARCH^^}[*]"
 	[ -n "${!var}" ]
 }
 
@@ -49,9 +49,9 @@ for_each_srcs() {
 	fi
 	. "$spec_file"
 	pkgname="$(basename "$pkgname")"
-	if declare -p "SRCS__${KABOOM_ARCH^^}" &>/dev/null ; then
-		val="SRCS__${KABOOM_ARCH^^}[@]"
-		val2="CHKSUMS__${KABOOM_ARCH^^}[@]"
+	if declare -p "SRCS__${KABOOM_TARGET_ARCH^^}" &>/dev/null ; then
+		val="SRCS__${KABOOM_TARGET_ARCH^^}[@]"
+		val2="CHKSUMS__${KABOOM_TARGET_ARCH^^}[@]"
 	fi
 	local real_srcs=("${!val}")
 	local real_chksums=("${!val2}")

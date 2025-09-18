@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-if [ -z "$KABOOM_TOP" ] || [ -z "$KABOOM_ARCH" ] ; then
+if [ -z "$KABOOM_TOP" ] || [ -z "$KABOOM_TARGET_ARCH" ] ; then
 	echo "[!!!!] This is a helper program meant to be used with kaboom2."
 	exit 1
 fi

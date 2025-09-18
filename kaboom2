@@ -104,20 +104,20 @@ if [ -z "${1}" ]; then
 	exit 1
 fi
 
-# Pass $1 to $KABOOM_ARCH, used by other scripts.
-export KABOOM_ARCH="${1}"
+# Pass $1 to $KABOOM_TARGET_ARCH, used by other scripts.
+export KABOOM_TARGET_ARCH="${1}"
 
-# Check if KABOOM_ARCH is valid.
-if [ ! -e "$KABOOM_TOP"/targets/"$KABOOM_ARCH" ] ; then
+# Check if KABOOM_TARGET_ARCH is valid.
+if [ ! -e "$KABOOM_TOP"/targets/"$KABOOM_TARGET_ARCH" ] ; then
 	aberr "The architecture specified is not yet supported by Kaboom. Please consider adapting Kaboom to this architecture."
 fi
 
 export KABOOM_DL_DIR="$KABOOM_TOP"/sources
-export KABOOM_BUILD_DIR="$KABOOM_TOP"/build-"$KABOOM_ARCH"
-export KABOOM_TOOLCHAIN_PREFIX="$KABOOM_TOP"/toolchain-"$KABOOM_ARCH"
-export KABOOM_TOOLCHAIN_DIR="$KABOOM_TOP"/toolchain-"$KABOOM_ARCH"
-export KABOOM_STAGE0_SYSROOT="$KABOOM_TOP"/stage0-"$KABOOM_ARCH"
-export KABOOM_STAGE1_SYSROOT="$KABOOM_TOP"/stage1-"$KABOOM_ARCH"
+export KABOOM_BUILD_DIR="$KABOOM_TOP"/build-"$KABOOM_TARGET_ARCH"
+export KABOOM_TOOLCHAIN_PREFIX="$KABOOM_TOP"/toolchain-"$KABOOM_TARGET_ARCH"
+export KABOOM_TOOLCHAIN_DIR="$KABOOM_TOP"/toolchain-"$KABOOM_TARGET_ARCH"
+export KABOOM_STAGE0_SYSROOT="$KABOOM_TOP"/stage0-"$KABOOM_TARGET_ARCH"
+export KABOOM_STAGE1_SYSROOT="$KABOOM_TOP"/stage1-"$KABOOM_TARGET_ARCH"
 
 KABOOM_HOST_ARCH=$(dpkg --print-architecture)
 KABOOM_HOST_TRIPLE="$(dirname $(gcc --print-prog-name=cc1))"
@@ -134,7 +134,7 @@ mkdir -p "$KABOOM_DL_DIR"
 mkdir -p "$KABOOM_TOOLCHAIN_DIR"
 mkdir -p "$KABOOM_BUILD_DIR"
 
-source "$KABOOM_TOP"/targets/"$KABOOM_ARCH"
+source "$KABOOM_TOP"/targets/"$KABOOM_TARGET_ARCH"
 source "$KABOOM_TOP"/lib/arch.bash
 source "$KABOOM_TOP"/lib/build.bash
 source "$KABOOM_TOP"/lib/spec.bash

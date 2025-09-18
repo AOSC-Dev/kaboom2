@@ -44,21 +44,21 @@ echo $'#include <iostream>\nint main(){std::cout << "Test" << std::endl;return 0
 if [ ! -x dummy ]; then
 	aberr "g++ failed to produce a binary ..."
 fi
-rm -f dummy.c dummmy.cpp dummy
+rm -f dummy.c dummy.cpp dummy
 popd
 
 if [ "$KABOOM_ERROR" = "1" ] ; then
 	abdie "Environment check failed. See the output above for details."
 fi
 
-#if [ "$_ARCH" != "$KABOOM_ARCH" ] ; then
+#if [ "$_ARCH" != "$KABOOM_TARGET_ARCH" ] ; then
 #	# We are cross compiling the stage 0.
 #	CROSS_STAGE0=1
 #	abinfo "Cross compiling from $_HOST_TRIPLE to $_TARGET"
 if systemd-detect-virt -qc ; then
 	abwarn "Make sure the host system has $_BINFMT registered in binfmt_misc registry."
 elif [ -n "${KABOOM_BINFMT_SKIP}" ] && [ "${KABOOM_BINFMT_SKIP/$KABOOM_HOST_ARCH/}" != "${KABOOM_BINFMT_SKIP}" ] ; then
-	if [ "$KABOOM_ARCH" = "arm64" ] ; then
+	if [ "$KABOOM_TARGET_ARCH" = "arm64" ] ; then
 		abwarn "Be aware that not all AArch64 processors are capable of running AArch32 binaries natively."
 		abwarn "Please check if your machine supports 32-bit EL0 and EL1 before continuing."
 	else

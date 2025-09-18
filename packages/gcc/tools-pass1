@@ -10,7 +10,7 @@ if ab_match_arch ia64 ; then
 	done
 fi
 
-md build-"$KABOOM_ARCH"
+md build-"$KABOOM_TARGET_ARCH"
 expand_arch_def
 configure_tools \
 	--with-newlib \

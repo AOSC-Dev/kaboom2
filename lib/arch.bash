@@ -28,9 +28,9 @@ RETRO_ARCHS=(
 # # This results in:
 # ../configure [...] --with-cpu=i486 --with-tune=pentium2 \
 # 	--enable-default-ssp
-# You MUST set ${PKGNAME^^}_${KABOOM_CUR_STAGE^^}_DEF__$KABOOM_ARCH in targets/$KABOOM_ARCH!
+# You MUST set ${PKGNAME^^}_${KABOOM_CUR_STAGE^^}_DEF__$KABOOM_TARGET_ARCH in targets/$KABOOM_TARGET_ARCH!
 expand_arch_def() {
 	local var
-	var="${PKGNAME^^}_${KABOOM_CUR_STAGE^^}_DEF__${KABOOM_ARCH^^}[@]"
+	var="${PKGNAME^^}_${KABOOM_CUR_STAGE^^}_DEF__${KABOOM_TARGET_ARCH^^}[@]"
 	ARCH_DEF=("${!var}")
 }

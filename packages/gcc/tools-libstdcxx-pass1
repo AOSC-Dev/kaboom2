@@ -1,6 +1,6 @@
 #!/bin/bash
 pushd "$PKGNAME-$PKGVER"/libstdc++-v3
-md build-"$KABOOM_ARCH"
+md build-"$KABOOM_TARGET_ARCH"
 
 expand_arch_def
 configure_native2 \
