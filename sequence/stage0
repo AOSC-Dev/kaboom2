@@ -1,8 +1,10 @@
 linux headers
 glibc
+pkgconf
 m4
 ncurses
 readline
+gettext
 bash
 coreutils
 diffutils

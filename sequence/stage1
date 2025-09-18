@@ -1,10 +1,9 @@
-gettext
 bison
 perl
 zlib
 openssl
 libffi
-pythhon-3
+python-3
 util-linux
 texinfo
 wget
