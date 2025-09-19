@@ -139,7 +139,8 @@ make_install_tools() {
 }
 
 make_install_native() {
-	make install DESTDIR="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" "$@" || \
+	fakeroot \
+		make install DESTDIR="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" "$@" || \
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ into current system root."
 }
 
