@@ -38,3 +38,8 @@ abdie() {
 	set_title "Failed at $KABOOM_CUR_STAGE $PKGNAME"
 	exit 1
 }
+
+set_trap() {
+	set -e
+	trap 'abdie "Failed to build ‘$PKGNAME-$PKGVER’ during stage ‘$KABOOM_CUR_STAGE’"' ERR
+}
