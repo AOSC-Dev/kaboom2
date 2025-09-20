@@ -217,20 +217,17 @@ execute_sequence() {
 		abdie "Sequence file for stage ‘$KABOOM_CUR_STAGE’ does not exist."
 	fi
 	IFS=$'\n'
-	sequence=($(cat "$KABOOM_TOP/sequence/$sequence"))
+	sequence=($(cat "$KABOOM_TOP/sequence/$sequence" | sed '/^#/d'))
 	mkdir -p "$KABOOM_BUILD_DIR"/"$KABOOM_CUR_STAGE"
 	unset IFS
 	total="${#sequence[@]}"
 	for entry in "${sequence[@]}" ; do
-		if [ "${entry###}" != "$entry" ] ; then
-			# a comment line
-			continue
-		fi
 		entry2=($entry)
 		package="${entry2[0]}"
 		if [ -n "$KABOOM_CONTINUE_PACKAGE" ] ; then
 			if ! bool "$continued" && \
  				[ "$KABOOM_CONTINUE_PACKAGE" != "$package" ] ; then
+				index=$(( $index + 1 ))
 				continue
 			fi
 		fi
