@@ -58,6 +58,7 @@ for_each_srcs() {
 	index=0
 	for src in "${real_srcs[@]}" ; do
 		src_entry=($src)
+		srctype="${src_entry[0]}"
 		if [ "${srctype//@(tbl|file)}" != "$srctype" ] && [ "${#src_entry[@]}" != 3 ] ; then
 			aberr "Invalid source entry: ‘$src’. Tarball and file entries should have 3 components:"
 			aberr "    \"SRCTYPE SRCURL RENAME\""
@@ -69,7 +70,6 @@ for_each_srcs() {
 		fi
 
 		rename="default"
-		srctype="${src_entry[0]}"
 		url="${src_entry[1]}"
 		urlscheme="${url%%:*}"
 		rename="${src_entry[2]}"
