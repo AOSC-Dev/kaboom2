@@ -157,7 +157,7 @@ cmake_native() {
 	local src="$1"
 	local bld="$2"
 	shift 2
-	if [ -z "$1" ] || [ -z "$2" ] ; then
+	if [ -z "$src" ] || [ -z "$bld" ] ; then
 		abdie "Usage: $0 SRCDIR BLDDIR"
 	fi
 	abinfo "CMake: using source directory $src"
@@ -168,6 +168,7 @@ cmake_native() {
 	if ! [ -f "$src"/CMakeLists.txt ] ; then
 		abdie "Can not find CMakeLists.txt!"
 	fi
+	abinfo "$PKGNAME: Running CMake ..."
 	cmake -S "$src" -B "$bld" \
 		"${KABOOM_CMAKE_NATIVE_DEF[@]}" \
 		"${ARCH_DEF[@]}" \
@@ -176,25 +177,36 @@ cmake_native() {
 }
 
 cmake_build() {
+	local NPROC=$(nproc)
+	NPROC=$(( $NPROC + 1 ))
+	if bool "$NOPARALLEL" ; then
+		abinfo "Parallel build is disabled."
+		NPROC=1
+	fi
 	local bld="$1"
 	shift 1
 
 	if [ "$1" = "--" ] ; then
 		shift 1
 	fi
-	cmake --build "$bld" "$@" || {
+	abinfo "$PKGNAME: Building ..."
+	cmake --build "$bld" -j"$NPROC" "$@" || {
 		abdie "Failed to build ‘$PKGNAME-$PKGVER’ with CMake."
 	}
 }
 
-cmake_install() {
+cmake_install_native() {
 	local bld="$1"
 	shift 1
 
 	if [ "$1" = "--" ] ; then
 		shift 1
 	fi
-	cmake --install "$bld" "$@" || {
+	abinfo "$PKGNAME: Installing to the target ..."
+	fakeroot \
+		cmake --install "$bld" \
+		--prefix "$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")"/usr \
+		"$@" || {
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ with CMake."
 	}
 }
