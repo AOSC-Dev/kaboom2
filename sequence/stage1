@@ -6,6 +6,7 @@ libffi
 python-3
 util-linux
 texinfo
+ca-certs
 wget
 libarchive
 libmd
@@ -17,6 +18,9 @@ nano
 pcre2
 expat
 git
+htop
+vim
+fastfetch
 autoconf
 automake
 bzip2
