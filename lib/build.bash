@@ -50,7 +50,7 @@ KABOOM_AUTOTOOLS_NATIVE_DEF2=(
 if bool "$KABOOM_CROSS_STAGE1" ; then
 	# NOTE: some packages may require this while cross compiling.
 	KABOOM_AUTOTOOLS_NATIVE_DEF+=(
-		"--with-sysroot=$KABOOM_TOOLCHAIN_SYSROOT"
+		"--with-build-sysroot=$KABOOM_TOOLCHAIN_SYSROOT"
 	)
 	KABOOM_AUTOTOOLS_NATIVE_DEF2+=(
 		"--with-sysroot=$KABOOM_TOOLCHAIN_SYSROOT"
