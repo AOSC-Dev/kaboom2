@@ -80,6 +80,7 @@ md() {
 }
 
 _configure() {
+	abinfo "$PKGNAME: Running configure script ..."
 	local c="$PWD"/configure
 	if [ ! -x "$c" ] ; then
 		c="$(realpath $PWD/..)"/configure
@@ -91,6 +92,7 @@ _configure() {
 }
 
 configure_tools() {
+	abinfo "$PKGNAME: Running configure for host toolchain ..."
 	_configure "${KABOOM_AUTOTOOLS_TOOLS_DEF[@]}" \
 		"${ARCH_DEF[@]}" \
 		"$@" || abdie \
@@ -98,6 +100,7 @@ configure_tools() {
 }
 
 configure_tools2() {
+	abinfo "$PKGNAME: Running configure for host applications ..."
 	_configure "${KABOOM_AUTOTOOLS_TOOLS_DEF2[@]}" \
 		"${ARCH_DEF[@]}" \
 		"$@" || abdie \
@@ -105,6 +108,7 @@ configure_tools2() {
 }
 
 configure_native() {
+	abinfo "$PKGNAME: Running configure for native toolchain ..."
 	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF[@]}" \
 		"${ARCH_DEF[@]}" \
 		"$@" || abdie \
@@ -113,6 +117,7 @@ configure_native() {
 
 # For applications within the toolchain prefix.
 configure_native2() {
+	abinfo "$PKGNAME: Running configure for native applications ..."
 	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF2[@]}" \
 		"${ARCH_DEF[@]}" \
 		"$@" || abdie \
@@ -120,8 +125,9 @@ configure_native2() {
 }
 
 make_build() {
+	abinfo "$PKGNAME: Commencing build ..."
 	local NPROC=$(nproc)
-	NPROC=$(( $NPROC + 1))
+	NPROC=$(( $NPROC + 1 ))
 	if bool "$NOPARALLEL" ; then
 		abinfo "Parallel build is disabled."
 		NPROC=1
@@ -134,11 +140,13 @@ make_build() {
 }
 
 make_install_tools() {
+	abinfo "$PKGNAME: Installing into the host toolchain prefix ..."
 	make install "$@" || \
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ into the toolchain directory."
 }
 
 make_install_native() {
+	abinfo "$PKGNAME: Installing into the target sysroot ..."
 	fakeroot \
 		make install DESTDIR="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" "$@" || \
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ into current system root."
