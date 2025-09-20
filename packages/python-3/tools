@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set_trap
 pushd Python-$PKGVER
 md build-"$KABOOM_HOST_TRIPLE"
 

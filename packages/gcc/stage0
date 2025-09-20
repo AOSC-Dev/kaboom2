@@ -1,0 +1,47 @@
+#!/bin/bash
+set_trap
+# Re-compile a version of GCC that is (mostly) full-featured.
+pushd "$PKGNAME-$PKGVER"
+
+if ab_match_arch ia64 ; then
+	abinfo "Applying patches ..."
+	METADIR="$(get_pkgmetadata_dir)"
+	for patch in "$METADIR"/*.patch.ia64 ; do
+		patch -Np1 < "$patch"
+	done
+fi
+
+METADIR="$(get_pkgmetadata_dir)"
+source "$METADIR"/spec
+for p in gmp mpc mpfr ; do
+	v=${p^^}VER
+	v2=${!v}
+	abinfo "Moving $p-$v2 into $p ..."
+	mv -v "$CUR_WORKSPACE"/"$p"-"$v2" "$p"
+done
+
+md build-"$KABOOM_TARGET_ARCH"
+expand_arch_def
+configure_native \
+	--enable-default-pie \
+	--enable-nls \
+	--enable-shared \
+	--disable-multilib \
+	--disable-threads \
+	--enable-languages="c,c++,lto" \
+	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues \
+	--enable-gnu-unique-object \
+	--enable-linker-build-id \
+	CFLAGS_FOR_TARGET="$KABOOM_TARGET_CFLAGS -O2" \
+	CXXFLAGS_FOR_TARGET="$KABOOM_TARGET_CXXFLAGS -O2"
+
+# During stage0, build flags are set for the target. However some host
+# libraries and binaries must be built, and it takes CFLAGS in the
+# environment, too, resulting an error.
+# Build all targets for the build environment first, without target
+# specific flags set.
+make_build all-build CFLAGS="-O2" CXXFLAGS="-O2"
+
+# Then build everything else.
+make_build
+make_install_native

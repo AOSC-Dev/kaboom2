@@ -1,0 +1,27 @@
+#!/bin/bash
+set_trap
+
+pushd vim.git
+
+configure_native2 \
+    --localstatedir=/var/lib/vim \
+    --with-features=huge \
+    --with-compiledby='AOSC Kaboom' \
+    --disable-gpm \
+    --without-x \
+    --disable-gui \
+    --enable-multibyte \
+    --enable-cscope \
+    --enable-netbeans \
+    --enable-perlinterp=dynamic \
+    --enable-pythoninterp=no \
+    --enable-python3interp=dynamic \
+    --disable-rubyinterp \
+    --disable-luainterp \
+    --disable-tclinterp \
+    --disable-xim \
+    --disable-fontset \
+    --with-tlib="ncursesw"
+
+make_build
+make_install_native VIMRCLOC=/etc

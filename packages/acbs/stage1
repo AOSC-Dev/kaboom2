@@ -1,0 +1,27 @@
+#!/bin/bash
+set_trap
+
+pushd acbs.git
+
+abinfo "Installing ACBS ..."
+PYTHONUSERBASE="$KABOOM_STAGE1_SYSROOT"/root/.local \
+	python3 -m pip install \
+	--user \
+	--no-compile \
+	"pyparsing>=2.4,<4" \
+	.
+
+abinfo "Cloning ABBS tree ..."
+git clone -b stable "$CUR_WORKSPACE"/aosc-os-abbs.git \
+	"$KABOOM_STAGE1_SYSROOT"/tree
+
+abinfo "Creating forest.conf ..."
+mkdir -p "$KABOOM_STAGE1_SYSROOT"/etc/acbs
+cat > "$KABOOM_STAGE1_SYSROOT"/etc/acbs/forest.conf << EOF
+[default]
+location = /tree
+EOF
+
+abinfo "Patching the shebang of acbs-build ..."
+sed -i -e "1s|$KABOOM_TOOLCHAIN_PREFIX|/usr|" \
+	"$KABOOM_STAGE1_SYSROOT"/root/.local/bin/acbs-build

@@ -1,8 +1,10 @@
 VER=20250824
 SRCS=(
 	"git	https://github.com/AOSC-Dev/acbs	default	tags/${VER}"
+	"git	https://github.com/AOSC-Dev/aosc-os-abbs	aosc-os-abbs.git stable"
 )
 CHKSUMS=(
+	"SKIP"
 	"SKIP"
 )
 CHKUPDATE="anitya::id=226984"

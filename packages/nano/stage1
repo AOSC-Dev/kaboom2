@@ -1,0 +1,56 @@
+#!/bin/bash
+set_trap
+
+pushd nano.git
+
+abinfo "Patching autogen.sh for https.git.savannah.gnu.org ..."
+sed -i -e 's|git://git.sv.gnu.org/|https://https.git.savannah.gnu.org/git/|g' \
+	autogen.sh
+
+abinfo "Runnig autogen.sh ..."
+./autogen.sh || abdie "Failed to run autogen.sh."
+
+md build-"$KABOOM_TARGET_ARCH"
+
+configure_native2 \
+	--enable-nls \
+	--disable-threads \
+	--enable-browser \
+	--enable-color \
+	--enable-comment \
+	--enable-extra \
+	--enable-formatter \
+	--enable-help \
+	--enable-histories \
+	--enable-justify \
+	--enable-libmagic \
+	--enable-linter \
+	--enable-linenumbers \
+	--enable-mouse \
+	--enable-multibuffer \
+	--enable-nanorc \
+	--enable-operatingdir \
+	--enable-speller \
+	--enable-tabcomp \
+	--enable-wordcomp \
+	--enable-wrapping \
+	--disable-debug \
+	--disable-tiny \
+	--enable-utf8 \
+	--disable-altrcname
+
+make_build
+make_install_native
+
+abinfo "Installing nanorc ..."
+pushd "$CUR_WORKSPACE"/nanorc
+find . \
+	-type f \
+	-name '*.nanorc' \
+	-exec \
+	install -Dvm644 {} "$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")"/usr/share/nano/{} \;
+
+METADIR=$(get_pkgmetadata_dir)
+abinfo "Installing nanorc ..."
+install -Dvm644 "$METADIR"/nanorc \
+	"$(realpath $KABOOM_TOOLCHAIN_SYSROOT)"/etc/nanorc

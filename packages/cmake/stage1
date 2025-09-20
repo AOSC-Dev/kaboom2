@@ -1,0 +1,15 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+
+cmake_native \
+	"$PWD" \
+	"$PWD"/build-"$KABOOM_TARGET_ARCH" \
+	-DCMAKE_USE_SYSTEM_LIBARCHIVE=ON \
+	-DCMAKE_USE_SYSTEM_CURL=ON \
+	-DCMAKE_USE_SYSTEM_EXPAT=ON \
+	-DCMAKE_CXX_FLAGS="${KABOOM_TARGET_CXXFLAGS} -fpermissive"
+
+cmake_build "$PWD"/build-"$KABOOM_TARGET_ARCH"
+cmake_install_native "$PWD"/build-"$KABOOM_TARGET_ARCH"

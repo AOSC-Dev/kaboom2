@@ -1,0 +1,25 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+
+env \
+CC="$KABOOM_TARGET_CC" \
+CXX="$KABOOM_TARGET_CXX" \
+LD="$KABOOM_TARGET_LD" \
+	./Configure \
+	linux-generic64 \
+	no-asm \
+	--prefix=/usr \
+	--openssldir=/etc/ssl \
+	no-threads \
+	shared \
+	no-docs \
+	no-fuzz-libfuzzer \
+	no-fuzz-afl \
+	no-afalgeng \
+	enable-camellia \
+	no-unit-test
+
+make_build
+make_install_native

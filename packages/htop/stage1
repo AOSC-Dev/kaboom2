@@ -1,0 +1,10 @@
+#!/bin/bash
+set_trap
+
+pushd htop.git
+abinfo "Running autogen.sh ..."
+./autogen.sh || abdie "Failed to generate the configure script."
+
+configure_native2
+make_build
+make_install_native

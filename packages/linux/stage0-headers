@@ -1,7 +1,6 @@
 #!/bin/bash
-set -e
+set_trap
 pushd linux-*
-false
 
 make ARCH="$KABOOM_KERNEL_ARCH" \
 	CROSS_COMPILE="$KABOOM_TARGET_TRIPLE"- \

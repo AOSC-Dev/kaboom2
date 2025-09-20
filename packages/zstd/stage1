@@ -1,0 +1,21 @@
+#!/bin/bash
+set_trap
+
+pushd zstd.git
+
+abinfo "Building zstd library ..."
+make_build \
+	CC="$KABOOM_TARGET_CC" \
+	CXX="$KABOOM_TARGET_CXX" \
+	LD="$KABOOM_TARGET_LD" \
+	lib-nomt
+
+abinfo "Building zstd utilities ..."
+make_build \
+	CC="$KABOOM_TARGET_CC" \
+	CXX="$KABOOM_TARGET_CXX" \
+	LD="$KABOOM_TARGET_LD" \
+	HAVE_THREAD=0
+
+make_install_native \
+	PREFIX=/usr

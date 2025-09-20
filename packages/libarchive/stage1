@@ -1,0 +1,17 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+configure_native2 \
+	--enable-shared \
+	--without-lz4 \
+	--without-xml2 \
+	--without-libb2 \
+	--without-bz2lib \
+	--without-cng \
+	--without-expat
+
+make
+make_install_native

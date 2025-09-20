@@ -1,0 +1,15 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+PKG_CONFIG_PATH="$KABOOM_TARGET_PKGCONFIG" \
+	configure_native2 \
+	--with-openssl \
+	--disable-threads \
+	--disable-threaded-resolver \
+	--without-libpsl
+
+make_build
+make_install_native

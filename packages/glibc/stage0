@@ -1,4 +1,5 @@
 #!/bin/bash
+set_trap
 
 if ab_match_arch ia64 ; then
 	pushd glibc-ia64.git

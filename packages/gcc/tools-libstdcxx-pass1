@@ -1,4 +1,5 @@
 #!/bin/bash
+set_trap
 pushd "$PKGNAME-$PKGVER"/libstdc++-v3
 md build-"$KABOOM_TARGET_ARCH"
 
@@ -12,6 +13,7 @@ configure_native2 \
 make_build
 make_install_native
 abinfo "Moving C++ headers into the toolchain ..."
+mkdir -p "$KABOOM_TOOLCHAIN_DIR"/"$KABOOM_TARGET_TRIPLE"/include/
 mv -v "$KABOOM_TOOLCHAIN_SYSROOT"/"$KABOOM_TOOLCHAIN_DIR"/"$KABOOM_TARGET_TRIPLE"/include/c++ \
 	"$KABOOM_TOOLCHAIN_DIR"/"$KABOOM_TARGET_TRIPLE"/include/c++
 

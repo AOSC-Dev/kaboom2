@@ -1,0 +1,8 @@
+VER=9.1.1779
+SRCS=(
+	"git	https://github.com/vim/vim.git	default	v${VER}"
+)
+
+CHKSUMS=(
+	"SKIP"
+)

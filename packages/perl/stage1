@@ -1,0 +1,20 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+
+abinfo "Extracting perl-cross ..."
+METADIR="$(get_pkgmetadata_dir)"
+source "$METADIR"/spec
+tar --strip-components=1 -xf "$KABOOM_TOP"/sources/perl-cross-"$PERL_CROSS_VER".tar.gz
+
+# Shadow build is not supported. This is not a standard autoconf script!
+./configure \
+	--target="$KABOOM_TARGET_TRIPLE" \
+	--target-tools-prefix="$KABOOM_TARGET_TRIPLE"- \
+	--prefix=/usr \
+	-Dld="$KABOOM_TARGET_TRIPLE"-ld \
+	-Dosname=linux \
+	-Dperladmin=root
+make_build
+make_install_native

@@ -1,0 +1,23 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+configure_native2 \
+	--disable-sulogin \
+	--disable-su \
+	--disable-nologin \
+	--disable-login \
+	--disable-setpriv \
+	--disable-runuser \
+	--without-python \
+	--disable-liblastlog2 \
+	--disable-pam-lastlog2 \
+	--without-systemd \
+	--without-econf \
+	--without-cap-ng \
+	--without-udev
+
+make_build
+make_install_native

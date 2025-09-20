@@ -1,0 +1,19 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+configure_native \
+	--without-sysroot \
+	--with-build-sysroot="$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")" \
+	--enable-shared \
+	--disable-threads \
+	--with-pic \
+	--enable-ld \
+	--enable-lto \
+	--enable-gdb \
+	--enable-default-hash-style=gnu \
+	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues
+make_build
+make_install_native

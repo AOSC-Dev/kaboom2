@@ -1,0 +1,7 @@
+VER=2.52.0
+SRCS=(
+	"git	https://github.com/fastfetch-cli/fastfetch	default	${VER}"
+)
+CHKSUMS=(
+	"SKIP"
+)

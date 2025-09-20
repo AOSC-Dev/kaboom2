@@ -1,0 +1,19 @@
+#!/bin/bash
+set_trap
+
+abinfo "Making stubs ..."
+for bin in \
+	apt apt-cache apt-get \
+	go gem meson ninja python2 ruby; do
+	ln -svf "true" \
+		"$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
+done
+abinfo "Making systemd stubs ..."
+for bin in \
+	systemctl \
+	systemd-detect-virt \
+	systemd-sysusers \
+	systemd-tmpfiles \
+	systemd-hwdb ; do
+	ln -svf true "$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
+done

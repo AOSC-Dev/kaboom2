@@ -1,0 +1,56 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+# Override a few variables.
+# bash_cv_func_strchrnul_works: Forcing it to be yes to not causing
+# declaration conflicts while building C++ plugins, e.g. Autobuild4.
+configure_native2 \
+	--with-curses \
+	--enable-readline \
+	--without-bash-malloc \
+	--enable-alias \
+	--enable-array-variables \
+	--enable-brace-expansion \
+	--enable-casemod-expansions \
+	--enable-command-timing \
+	--enable-coprocesses \
+	--enable-directory-stack \
+	--enable-dparen-arithmetic \
+	--enable-extended-glob \
+	--enable-function-import \
+	--enable-history \
+	--enable-job-control \
+	--enable-multibyte \
+	--enable-process-substitution \
+	--enable-progcomp \
+	--enable-prompt-string-decoding \
+	--enable-select \
+	--enable-translatable-strings \
+	bash_cv_func_strchrnul_works=yes
+
+make_build
+make_install_native
+
+abinfo "Installing bashrc files ..."
+install -Dvm644 "$CUR_WORKSPACE"/bash-config.git/bashrc \
+	"$KABOOM_STAGE0_SYSROOT"/etc/bashrc
+cp -r "$CUR_WORKSPACE"/bash-config.git/bashrc.d \
+	"$KABOOM_STAGE0_SYSROOT"/etc/
+install -Dvm644 "$CUR_WORKSPACE"/bash-config.git/profile \
+	"$KABOOM_STAGE0_SYSROOT"/etc/profile
+cp -r "$CUR_WORKSPACE"/bash-config.git/profile.d \
+	"$KABOOM_STAGE0_SYSROOT"/etc/
+cp -r "$CUR_WORKSPACE"/bash-config.git/skel \
+	"$KABOOM_STAGE0_SYSROOT"/etc/
+
+cd "$CUR_WORKSPACE"/bash-config.git/skel
+find . \
+	-type f \
+	-exec install {} \
+	"$KABOOM_STAGE0_SYSROOT"/root/{} \;
+
+abinfo "Creating symlink ..."
+ln -svf bash "$KABOOM_STAGE0_SYSROOT"/usr/bin/sh

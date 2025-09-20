@@ -1,0 +1,12 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+configure_native2 \
+	--enable-shared \
+	--with-libintl-prefix="$KABOOM_TOOLCHAIN_SYSROOT"/usr \
+	LDFLAGS="-lintl"
+make_build
+make_install_native

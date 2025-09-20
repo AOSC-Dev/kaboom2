@@ -1,0 +1,28 @@
+#!/bin/bash
+set_trap
+
+pushd dpkg.git
+
+METADIR="$(get_pkgmetadata_dir)"
+
+for arch in armv4 armv6hf armv7hf i486 loongarch64 loongson2f loongson3 ; do
+	if ab_match_arch "$arch" ; then
+		abinfo "Applying dpkg patch for $arch ..."
+		for patchfile in $(find "$METADIR"/patches -type f -name '*.patch.'"$arch") ; do
+			abinfo "Applying patch $patchfile ..."
+			patch -Np1 < "$patchfile"
+		done
+		break
+	fi
+done
+
+abinfo "Generating configure script ..."
+./autogen || abdie "Failed to run autogen."
+
+md build-"$KABOOM_TARGET_ARCH"
+configure_native2 \
+	--with-libz \
+	--with-liblzma \
+	--with-libzstd
+make_build
+make_install_native

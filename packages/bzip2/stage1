@@ -1,0 +1,17 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+
+abinfo "Building bzip2 ..."
+# Welp, can't run target binaries :'<
+make_build \
+	CC="$KABOOM_TARGET_CC" \
+	AR="$KABOOM_TARGET_AR" \
+	RANLIB="$KABOOM_TARGET_RANLIB" \
+	libbz2.a bzip2 bzip2recover
+
+abinfo "Installing ..."
+make_build \
+	PREFIX="$KABOOM_STAGE1_SYSROOT"/usr \
+	install

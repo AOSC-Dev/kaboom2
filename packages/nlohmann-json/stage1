@@ -1,0 +1,8 @@
+#!/bin/bash
+set_trap
+
+pushd json-"$PKGVER"
+
+cmake_native "$PWD" "$PWD"/build-"$KABOOM_TARGET_ARCH"
+cmake_build "$PWD"/build-"$KABOOM_TARGET_ARCH"
+cmake_install_native "$PWD"/build-"$KABOOM_TARGET_ARCH"

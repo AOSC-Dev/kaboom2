@@ -1,10 +1,13 @@
 #!/bin/bash
+set_trap
 pushd "$PKGNAME-$PKGVER"
 md build-"$KABOOM_TARGET_ARCH"
 configure_tools \
 	--disable-nls \
 	--disable-werror \
-	--enable-gprofing=no
+	--enable-gprofing=no \
+	--enable-default-hash-style=gnu \
+	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues
 
 make_build
 make_install_tools

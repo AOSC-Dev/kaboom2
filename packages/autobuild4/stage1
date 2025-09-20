@@ -1,0 +1,15 @@
+#!/bin/bash
+set_trap
+
+pushd autobuild4.git
+
+cmake_native "$PWD" "$PWD"/build-"$KABOOM_TARGET_ARCH" \
+	-DSYSCONF_INSTALL_DIR=/etc
+cmake_build "$PWD"/build-"$KABOOM_TARGET_ARCH"
+# FIXME: Must specify DESTDIR, otherwise the plugin will be installed to /usr.
+env DESTDIR="$KABOOM_STAGE1_SYSROOT" \
+	fakeroot cmake --install \
+	"$PWD"/build-"$KABOOM_TARGET_ARCH"
+
+abinfo "Setting prefix in the configuration ..."
+echo "/usr/lib/autobuild4" > "$KABOOM_STAGE1_SYSROOT"/etc/autobuild/prefix

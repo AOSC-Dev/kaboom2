@@ -1,0 +1,10 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+configure_native2 \
+	--with-ssl=openssl
+make_build
+make_install_native

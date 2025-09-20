@@ -1,0 +1,40 @@
+#!/bin/bash
+set_trap
+
+METADIR=$(get_pkgmetadata_dir)
+SYSROOT="$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")"
+abinfo "Installing scripts ..."
+for script in \
+	make-ca make-cert.pl remove-expired-certs update-ca-bundle ; do
+	install -Dvm755 "$METADIR"/contrib/"$script" \
+		"$SYSROOT"/usr/bin/"$script"
+done
+
+abinfo "Creating /etc/ssl ..."
+install -dv "$SYSROOT"/etc/ssl/certs
+
+abinfo "Running make-ca ..."
+env PKGDIR="$SYSROOT" \
+	"$METADIR"/contrib/make-ca
+
+abinfo "Removing expired certs ..."
+env PKGDIR="$SYSROOT" \
+	"$METADIR"/contrib/remove-expired-certs certs
+
+abinfo "Installing certificats ..."
+find certs -type f -exec install -Dvm644 {} "$SYSROOT"/etc/ssl/{} \;
+
+# From Buildroot
+abinfo "Creating CA certficate bundle ..."
+for crtfile in $(find ./certs -type f -printf '%P\n' | sort) ; do
+	cat certs/"$crtfile" >> "$CUR_WORKSPACE"/ca-bundle.crt
+done
+install -Dvm644 "$CUR_WORKSPACE"/ca-bundle.crt \
+	"$SYSROOT"/etc/ssl/ca-bundle.crt
+
+abinfo "Creating CA bundle symlinks ..."
+ln -svf ../ca-bundle.crt \
+	"$SYSROOT"/etc/ssl/certs/ca-certificates.crt
+
+abinfo "Recalculating hashes ..."
+c_rehash "$SYSROOT"/etc/ssl/certs

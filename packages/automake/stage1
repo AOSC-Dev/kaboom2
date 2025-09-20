@@ -1,0 +1,12 @@
+#!/bin/bash
+set_trap
+
+pushd automake.git
+abinfo "Running bootstrap ..."
+./bootstrap || abdie "Failed to generate configure script."
+
+# amhello is being tested with host toolchain...
+configure_native \
+	CFLAGS="-O2"
+make_build
+make_install_native

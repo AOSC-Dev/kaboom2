@@ -1,0 +1,20 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+METADIR=$(get_pkgmetadata_dir)
+for patch in "$METADIR"/*.patch ; do
+	abinfo "Applying ‘$(basename $patch)’ ..."
+	patch -Np1 < "$patch" || abdie "Failed to apply patch ‘$(basename $patch)’."
+done
+
+md build-"$KABOOM_TARGET_ARCH"
+
+# undefined reference to `libintl_dgettext'.
+configure_native2 \
+	--program-prefix=eu- \
+	--disable-install-elfh \
+	--disable-debuginfod \
+	LDFLAGS="-lintl"
+make_build
+make_install_native

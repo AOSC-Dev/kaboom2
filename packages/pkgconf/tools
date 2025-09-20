@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set_trap
 
 pushd pkgconf.git
 abinfo "Generating configure script ..."

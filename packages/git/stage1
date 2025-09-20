@@ -1,0 +1,23 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+
+# FIXME:
+# checking whether iconv omits bom for utf-16 and utf-32... configure: error: in '/buildroot/cyan/kaboom2/build-ia64/stage1/git/git-2.51.0':
+# configure: error: cannot run test program while cross compiling
+# Let's override this with a no.
+# Also from Buildroot: override more test results.
+configure_native2 \
+	--with-openssl \
+	--with-libpcre2 \
+	--with-curl \
+	--with-expat \
+	--with-editor=/usr/bin/nano \
+	--without-tcltk \
+	ac_cv_iconv_omits_bom=no \
+	ac_cv_fread_reads_directories=yes \
+	ac_cv_snprintf_returns_bogus=yes
+
+make_build
+make_install_native
