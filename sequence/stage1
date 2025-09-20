@@ -25,5 +25,4 @@ nlohmann-json
 elfutils
 autobuild4
 acbs
-apt-stub
-systemd-stub
+misc-stubs
