@@ -22,17 +22,6 @@ set_title() {
 	echo -ne "\e]0;[kaboom] $@\007\r"
 }
 
-ab_match_arch() {
-	if [ "$1" = "mainline" ] || \
-		[ "$1" = "retro" ] ; then
-		local all_arch var="$1[*]"
-		all_arch=" ${!var} "
-		[ "${all_arch// $KABOOM_TARGET_ARCH /}" != "${all_arch}" ]
-	else
-		[ "$1" = "$KABOOM_TARGET_ARCH" ]
-	fi
-}
-
 abdie() {
 	echo -e "[\e[31mERROR\e[0m]: \e[1m$*\e[0m"
 	set_title "Failed at $KABOOM_CUR_STAGE $PKGNAME"

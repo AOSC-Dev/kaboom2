@@ -5,6 +5,16 @@ MAINLINE_ARCHS=(
 RETRO_ARCHS=(
 	alpha armv4 armv6hf armv7hf i486 ia64 loongson2f m68k powerpc ppc64
 )
+ab_match_arch() {
+	[ "$1" = "$KABOOM_TARGET_ARCH" ]
+}
+
+ab_match_archgroup() {
+	local group="$1"
+	local all_arch var="${group^^}_ARCHS[*]"
+	all_arch=" ${!var} "
+	[ "${all_arch// $KABOOM_TARGET_ARCH /}" != "${all_arch}" ]
+}
 
 # Sets ARCH_DEF array to the expanded value.
 # This is useful if you define package-specific flags that can be appeneded
