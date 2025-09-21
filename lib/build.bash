@@ -252,7 +252,7 @@ execute_sequence() {
 		PKGSPEC="$KABOOM_TOP/packages/$package/spec"
 		PKGVER="$(source $PKGSPEC ; echo $VER)"
 		abinfo "Building $PKGNAME-$PKGVER ..."
-		set_title "[$KABOOM_CUR_STAGE] [$index/$total] $PKGNAME"
+		set_title "$KABOOM_CUR_STAGE: [$index/$total] $PKGNAME"
 		checkout_srcs "$PKGSPEC"
 		pushd "$CUR_WORKSPACE"
 		ARCH_DEF=()

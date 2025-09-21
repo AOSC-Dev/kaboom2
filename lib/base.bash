@@ -19,7 +19,7 @@ set_title() {
 	if [ "${TERM//xterm/}" == "$TERM" ] ; then
 		return
 	fi
-	echo -ne "\e]0;[kaboom] $@\007\r"
+	echo -ne "\e]0;kaboom: $@\007\r"
 }
 
 abdie() {
