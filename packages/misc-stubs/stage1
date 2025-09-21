@@ -17,3 +17,10 @@ for bin in \
 	systemd-hwdb ; do
 	ln -svf true "$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
 done
+
+abinfo "Creating /etc/passwd ..."
+echo "root:x:0:0:root:/root:/bin/bash" > \
+	"$KABOOM_STAGE1_SYSROOT"/etc/passwd
+abinfo "Creating /etc/group ..."
+echo "root:x:0:" > \
+	"$KABOOM_STAGE1_SYSROOT"/etc/group
