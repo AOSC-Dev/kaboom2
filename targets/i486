@@ -2,7 +2,7 @@
 
 # Target triple. For stage1 environment and cross toolchain, the vendor
 # should be 'kaboom'.
-# Vendor will be replaced with 'aosc' when cross-compiling binutils and gcc.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
 KABOOM_TARGET_TRIPLE="i486-kaboom-linux-gnu"
 
 # Target C Compiler flags.
