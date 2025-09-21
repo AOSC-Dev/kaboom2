@@ -47,3 +47,4 @@ Stage 1 finished!
 "
 abinfo "Output file: kaboom-stage1-$KABOOM_TARGET_ARCH-$(date "+%Y%m%d").tar.xz"
 abinfo "Target: $KABOOM_TARGET_ARCH ($KABOOM_TARGET_TRIPLE)"
+set_title "Finished!"
