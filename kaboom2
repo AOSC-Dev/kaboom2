@@ -128,7 +128,8 @@ export KABOOM_STAGE1_SYSROOT="$KABOOM_TOP"/stage1-"$KABOOM_TARGET_ARCH"
 # TBD.
 export KABOOM_CROSS_STAGE1=1
 
-if bool "$KABOOM_CROSS_STAGE1" ] ; then
+source "$KABOOM_TOP"/targets/"$KABOOM_TARGET_ARCH"
+if bool "$KABOOM_CROSS_STAGE1" ; then
 	export KABOOM_TARGET_TRIPLE="${KABOOM_TARGET_TRIPLE/kaboom/aosc}"
 else
 	export KABOOM_TARGET_TRIPLE="${KABOOM_TARGET_TRIPLE}"
@@ -147,7 +148,6 @@ mkdir -p "$KABOOM_DL_DIR"
 mkdir -p "$KABOOM_TOOLCHAIN_DIR"
 mkdir -p "$KABOOM_BUILD_DIR"
 
-source "$KABOOM_TOP"/targets/"$KABOOM_TARGET_ARCH"
 source "$KABOOM_TOP"/lib/arch.bash
 source "$KABOOM_TOP"/lib/build.bash
 source "$KABOOM_TOP"/lib/spec.bash
