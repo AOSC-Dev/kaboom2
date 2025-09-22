@@ -9,7 +9,8 @@ PKG_CONFIG_PATH="$KABOOM_TARGET_PKGCONFIG" \
 	--with-openssl \
 	--disable-threads \
 	--disable-threaded-resolver \
-	--without-libpsl
+	--without-libpsl \
+	--with-ca-bundle=/etc/ssl/ca-bundle.crt
 
 make_build
 make_install_native
