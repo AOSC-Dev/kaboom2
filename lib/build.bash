@@ -124,6 +124,38 @@ configure_native2() {
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
 }
 
+# Remove libtool archives.
+cleanup_la_tools() {
+	abinfo "Cleaning up libtool .la archives in the toolchain prefix ..."
+	find "$KABOOM_TOOLCHAIN_PREFIX"/lib \
+		-type f \
+		-name '*.la' \
+		-exec rm -v {} \;
+	find "$KABOOM_TOOLCHAIN_PREFIX"/"$KABOOM_TARGET_ARCH"/lib \
+		-type f \
+		-name '*.la' \
+		-exec rm -v {} \;
+	find "$KABOOM_TOOLCHAIN_PREFIX"/libexec \
+		-type f \
+		-name '*.la' \
+		-exec rm -v {} \;
+	if [ -d "$KABOOM_TOOLCHAIN_PREFIX"/lib64 ] ; then
+		find "$KABOOM_TOOLCHAIN_PREFIX"/lib64 \
+			-type f \
+			-name '*.la' \
+			-exec rm -v {} \;
+	fi
+}
+
+# Remove libtool archives.
+cleanup_la_native() {
+	abinfo "Cleaning up libtool .la archives ..."
+	find "$(realpath $KABOOM_TOOLCHAIN_SYSROOT)"/usr/lib \
+		-type f \
+		-name '*.la' \
+		-exec rm -v {} \;
+}
+
 make_build() {
 	abinfo "$PKGNAME: Commencing build ..."
 	local NPROC=$(nproc)
@@ -143,6 +175,7 @@ make_install_tools() {
 	abinfo "$PKGNAME: Installing into the host toolchain prefix ..."
 	make install "$@" || \
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ into the toolchain directory."
+	cleanup_la_tools || abdie "Failed to clean up libtool archive files in the toolchain prefix."
 }
 
 make_install_native() {
@@ -150,6 +183,7 @@ make_install_native() {
 	fakeroot \
 		make install DESTDIR="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" "$@" || \
 		abdie "Failed to install ‘$PKGNAME-$PKGVER’ into current system root."
+	cleanup_la_native || abdie "Failed to clean up libtool archive files in the target sysroot."
 }
 
 cmake_native() {
