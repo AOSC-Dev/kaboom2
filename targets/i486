@@ -30,4 +30,11 @@ KABOOM_KERNEL_ARCH=x86
 GCC_TOOLS_ARCH_DEF__I486=(
 	"--with-cpu=i486"
 	"--with-tune=bonnell"
+	"--enable-default-ssp"
+)
+
+GCC_STAGE0_ARCH_DEF__I486=(
+	"--with-cpu=i486"
+	"--with-tune=bonnell"
+	"--enable-default-ssp"
 )
