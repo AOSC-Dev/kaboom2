@@ -29,7 +29,7 @@ Usage: $0 [-m|--mode MODE] [-c|--continue CONTINUE] ARCH
 EOF
 }
 
-OPTS="$(getopt -o "m:c:" --long "mode:,continue-from:" -n "$0" -- "$@")"
+OPTS="$(getopt -o "m:c:" --long "mode:,continue-from:,debug-libc" -n "$0" -- "$@")"
 if [ "$?" != 0 ] ; then
 	usage
 	exit 1
@@ -70,6 +70,12 @@ while true ; do
 					;;
 			esac
 			shift 2
+			continue
+			;;
+		--debug-libc)
+			export KABOOM_DEBUG_LIBC=1
+			abinfo "Stage 0 glibc will be built with debug information."
+			shift 1
 			continue
 			;;
 		--)
