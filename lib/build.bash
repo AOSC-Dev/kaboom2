@@ -245,6 +245,28 @@ cmake_install_native() {
 	}
 }
 
+python_build_native() {
+	local pytarget="${KABOOM_TARGET_TRIPLE%%-*}"
+	CC="$KABOOM_TARGET_CC" \
+	CXX="$KABOOM_TARGET_CXX" \
+	LD="$KABOOM_TARGET_LD" \
+	_PYTHON_HOST_PLATFORM=linux-"$pytarget" \
+		"$KABOOM_TOOLCHAIN_PREFIX"/bin/python3 -m build -w -n || \
+		abdie "Failed to build the Python package."
+}
+
+python_install_native() {
+	local dist="$1"
+	if [ -z "$dist" ] ; then
+		dist="$PWD"/dist
+	fi
+	abinfo "Installing wheel files ..."
+	for file in $(find "$dist" -type f -name '*.whl') ; do
+		"$KABOOM_TOP"/helpers/python-installer \
+			"$file" || abdie "Failed to install wheel package ‘$(basename "$file")’."
+	done
+}
+
 execute_sequence() {
 	local sequence="$KABOOM_CUR_STAGE" entry entry2 script package name continued=0 total index=1
 	if [ ! -e "$KABOOM_TOP/sequence/$KABOOM_CUR_STAGE" ] ; then
@@ -260,7 +282,7 @@ execute_sequence() {
 		package="${entry2[0]}"
 		if [ -n "$KABOOM_CONTINUE_PACKAGE" ] ; then
 			if ! bool "$continued" && \
- 				[ "$KABOOM_CONTINUE_PACKAGE" != "$package" ] ; then
+				[ "$KABOOM_CONTINUE_PACKAGE" != "$package" ] ; then
 				index=$(( $index + 1 ))
 				continue
 			fi

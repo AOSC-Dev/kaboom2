@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+
+import os
+import platform # for python_version_tuple()
+import sys
+
+from pathlib import Path, PurePath
+
+import installer
+from installer import install
+from installer.destinations import SchemeDictionaryDestination
+from installer.sources import WheelFile
+# Custom pypa installer script.
+
+def main():
+	if 'KABOOM_TOOLCHAIN_SYSROOT' not in os.environ:
+		print("-- KABOOM_TOOLCHAIN_SYSROOT is not set.", file=sys.stderr)
+		sys.exit(1)
+
+	DESTDIR = os.environ['KABOOM_TOOLCHAIN_SYSROOT']
+	if len(DESTDIR) < 1:
+		print("-- KABOOM_TOOLCHAIN_SYSROOT is invalid.", file=sys.stderr)
+		sys.exit(1)
+	if len(sys.argv) < 2:
+		print("-- Requires wheel files to install", file=sys.stderr)
+		sys.exit(1)
+
+	# Paths
+	PYVER = platform.python_version_tuple()
+	PYPATH = "python{}.{}".format(PYVER[0], PYVER[1])
+	DESTDIR = Path(DESTDIR).resolve()
+	SITE_PACKAGES = DESTDIR / "usr" / "lib" / PYPATH / "site-packages"
+	INCDIR = DESTDIR / "usr" / "include" / PYPATH
+	BINDIR = DESTDIR / "usr" / "bin"
+
+	files = sys.argv[1:]
+	for file in files:
+		print(f"-- Installing wheel ‘{PurePath(file).name}’ to ‘{SITE_PACKAGES}’ ...", file=sys.stderr)
+		dest = SchemeDictionaryDestination(
+			{
+				"purelib": SITE_PACKAGES,
+				"platlib": SITE_PACKAGES,
+				"include": INCDIR,
+				"scripts": BINDIR,
+				"data": DESTDIR / "usr" / "share",
+			},
+			interpreter="/usr/bin/python3",
+			script_kind="posix"
+		)
+		try:
+			with WheelFile.open(file) as f:
+				installer.install(
+					source=f,
+					destination=dest,
+					additional_metadata={}
+				)
+			print(f"-- Installed wheeh package ‘{PurePath(file).name}’.", file=sys.stderr)
+		except Exception as e:
+			print(f"-- Failed to install wheel ‘{file}’: {e}.", file=sys.stderr)
+			sys.exit(1)
+
+if __name__ == "__main__":
+	main()
+
+# vim: ts=8 sw=8 noexpandtab
