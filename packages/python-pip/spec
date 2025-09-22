@@ -1,0 +1,7 @@
+VER=25.2
+SRCS=(
+	"tbl	https://files.pythonhosted.org/packages/20/16/650289cd3f43d5a2fadfd98c68bd1e1e7f2550a1a5326768cddfbcedb2c5/pip-${VER}.tar.gz	pip-${VER}.tar.gz"
+)
+CHKSUMS=(
+	"sha256	578283f006390f85bb6282dffb876454593d637f5d1be494b5202ce4877e71f2"
+)

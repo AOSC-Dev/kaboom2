@@ -4,6 +4,8 @@ zlib
 openssl
 libffi
 python-3
+python-setuptools
+python-pip
 gmp
 mpfr
 mpc
@@ -32,5 +34,6 @@ cmake
 nlohmann-json
 elfutils
 autobuild4
+python-pyparsing
 acbs
 misc-stubs

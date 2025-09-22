@@ -1,0 +1,6 @@
+#!/bin/bash
+set_trap
+
+pushd "${PKGNAME/python-/}"-"$PKGVER"
+python_build_native
+python_install_native

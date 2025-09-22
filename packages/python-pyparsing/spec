@@ -1,0 +1,7 @@
+VER=3.2.5
+SRCS=(
+	"tbl	https://files.pythonhosted.org/packages/f2/a5/181488fc2b9d093e3972d2a472855aae8a03f000592dbfce716a512b3359/pyparsing-${VER}.tar.gz	pyparsing-${VER}.tar.gz"
+)
+CHKSUMS=(
+	"sha256 2df8d5b7b2802ef88e8d016a2eb9c7aeaa923529cd251ed0fe4608275d4105b6"
+)

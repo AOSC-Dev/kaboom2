@@ -10,6 +10,7 @@ configure_native2 \
 	--with-build-python="$KABOOM_TOOLCHAIN_PREFIX"/bin/python3 \
 	--disable-pydoc \
 	--with-ensurepip \
+	--with-openssl="$KABOOM_STAGE1_SYSROOT"/usr \
 	ac_cv_have_long_long_format=yes \
 	ac_cv_working_tzset=yes \
 	ac_cv_buggy_getaddrinfo=no \
@@ -18,9 +19,3 @@ configure_native2 \
 
 make_build
 make_install_native
-
-# Somehow they are installed to the host toolchain.
-abinfo "Installing site-packages ..."
-rm -r "$KABOOM_TOOLCHAIN_SYSROOT"/usr/lib/python3.10/site-packages
-cp -r "$KABOOM_TOOLCHAIN_PREFIX"/lib/python3.10/site-packages \
-       	"$KABOOM_TOOLCHAIN_SYSROOT"/usr/lib/python3.10/

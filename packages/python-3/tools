@@ -7,4 +7,8 @@ configure_tools2 \
 	--with-ensurepip
 make_build
 make_install_tools
+
+abinfo "Installing host modules ..."
+python3 -m pip install --upgrade \
+	pip wheel pep517 platformdirs packaging click installer build
 popd
