@@ -8,9 +8,17 @@ python_build_native
 abinfo "Installing ACBS ..."
 python_install_native
 
-abinfo "Cloning ABBS tree ..."
-git clone -b stable "$CUR_WORKSPACE"/aosc-os-abbs.git \
-	"$KABOOM_STAGE1_SYSROOT"/tree
+if ! [ -d "$KABOOM_STAGE1_SYSROOT"/tree ] ; then
+	abinfo "Cloning ABBS tree ..."
+	git clone -b stable "$CUR_WORKSPACE"/aosc-os-abbs.git \
+		"$KABOOM_STAGE1_SYSROOT"/tree
+fi
+
+abinfo "Updating the ABBS tree ..."
+pushd "$KABOOM_STAGE1_SYSROOT"/tree
+git remote set-url origin https://github.com/AOSC-Dev/aosc-os-abbs.git
+git pull
+popd
 
 abinfo "Creating forest.conf ..."
 mkdir -p "$KABOOM_STAGE1_SYSROOT"/etc/acbs
@@ -22,3 +30,9 @@ EOF
 abinfo "Patching the shebang of acbs-build ..."
 sed -i -e "1s|$KABOOM_TOOLCHAIN_PREFIX|/usr|" \
 	"$KABOOM_STAGE1_SYSROOT"/root/.local/bin/acbs-build
+
+abinfo "Installing GCC specs ..."
+mkdir -pv "$KABOOM_STAGE1_SYSROOT"/usr/lib/gcc/specs
+pushd "$KABOOM_STAGE1_SYSROOT"/tree/core-devel/gcc/02-compiler/overrides/usr/lib/gcc/specs
+find -type f -exec install -Dvm644 {} "$KABOOM_STAGE1_SYSROOT"/usr/lib/gcc/specs/{} \;
+popd
