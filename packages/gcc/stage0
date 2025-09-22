@@ -45,3 +45,7 @@ make_build all-build CFLAGS="-O2" CXXFLAGS="-O2"
 # Then build everything else.
 make_build
 make_install_native
+
+abinfo "Creating cc -> gcc ..."
+ln -svf gcc "$KABOOM_STAGE0_SYSROOT"/usr/bin/cc
+ln -svf g++ "$KABOOM_STAGE0_SYSROOT"/usr/bin/c++
