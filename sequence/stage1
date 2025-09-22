@@ -4,6 +4,12 @@ zlib
 openssl
 libffi
 python-3
+gmp
+mpfr
+mpc
+pcre2
+expat
+gdb
 util-linux
 texinfo
 ca-certs
@@ -15,8 +21,6 @@ zstd
 dpkg
 curl
 nano
-pcre2
-expat
 git
 htop
 vim

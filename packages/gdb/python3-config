@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]
+then
+	echo "Bad # args.  Blech!" >&2
+	exit 1
+fi
+
+# The first argument is the path to python-config.py, ignore it.
+
+case "$2" in
+--includes) echo "-I/usr/include/python3.10" ;;
+--ldflags) echo "-L/usr/lib/python3.10 -L/usr/lib  -lintl -ldl  -lpthread -lm -lm -lpython3.10" ;;
+--exec-prefix) echo "/usr" ;;
+*) echo "Bad arg $2.  Blech!" >&2 ; exit 1 ;;
+esac
+
+exit 0

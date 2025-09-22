@@ -1,0 +1,37 @@
+#!/bin/bash
+set_trap
+
+METADIR="$(get_pkgmetadata_dir)"
+
+pushd "$PKGNAME"-"$PKGVER"
+md build-"$KABOOM_TARGET_ARCH"
+
+# Buildroot:
+# Do not ship ANY part from binutils.
+# See also:
+#   https://sourceware.org/gdb/wiki/CrossCompilingWithPythonSupport
+configure_native \
+	--disable-binutils \
+        --disable-install-libbfd \
+        --disable-ld \
+        --disable-gas \
+        --disable-gprof \
+	--without-uiout \
+        --disable-gdbtk \
+        --without-x \
+        --disable-sim \
+        --without-included-gettext \
+        --enable-static \
+        --disable-shared \
+	--enable-gdb \
+	--with-curses \
+	--with-system-zlib \
+	--with-system-readline \
+	--with-expat \
+	--with-mpfr="$KABOOM_STAGE1_SYSROOT"/usr \
+	--with-libexpat-prefix="$KABOOM_STAGE1_SYSROOT"/usr \
+	--with-gmp="$KABOOM_STAGE1_SYSROOT"/usr \
+	--with-python="$METADIR"/python3-config
+
+make_build
+make install DESTDIR="$PWD"/dist

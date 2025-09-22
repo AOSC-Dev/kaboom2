@@ -1,0 +1,10 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+# checking compiler ia64-aosc-linux-gnu-gcc -mtune=itanium2 -O2 ... no, long long reliability test 1
+export CFLAGS="$CFLAGS -std=gnu17"
+
+configure_native2
+make_build
+make_install_native

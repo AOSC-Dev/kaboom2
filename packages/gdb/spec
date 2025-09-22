@@ -1,0 +1,8 @@
+VER=16.3
+SRCS=(
+	"tbl	https://sourceware.org/pub/gdb/releases/gdb-16.3.tar.xz	default"
+)
+
+CHKSUMS=(
+	"sha256	bcfcd095528a987917acf9fff3f1672181694926cc18d609c99d0042c00224c5"
+)

@@ -1,0 +1,8 @@
+#!/bin/bash
+set_trap
+
+pushd "$PKGNAME"-"$PKGVER"
+
+configure_native2
+make_build
+make_install_native
