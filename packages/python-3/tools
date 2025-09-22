@@ -18,5 +18,7 @@ python3 -m pip install --upgrade \
 	pip \
 	packaging \
 	click \
-	installer
+	build \
+	installer \
+	pybind11
 popd
