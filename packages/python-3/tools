@@ -10,5 +10,13 @@ make_install_tools
 
 abinfo "Installing host modules ..."
 python3 -m pip install --upgrade \
-	pip wheel pep517 platformdirs packaging click installer build
+	flit-core \
+	setuptools \
+	platformdirs \
+	pep517 \
+	wheel \
+	pip \
+	packaging \
+	click \
+	installer
 popd
