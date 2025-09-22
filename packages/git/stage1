@@ -9,6 +9,7 @@ pushd "$PKGNAME"-"$PKGVER"
 # Let's override this with a no.
 # Also from Buildroot: override more test results.
 configure_native2 \
+	--disable-threads \
 	--with-openssl \
 	--with-libpcre2 \
 	--with-curl \
