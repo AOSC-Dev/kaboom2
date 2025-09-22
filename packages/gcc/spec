@@ -4,8 +4,8 @@ GMPVER=6.3.0
 MPFRVER=4.2.2
 SRCS=(
 	"tbl	https://ftpmirror.gnu.org/gnu/gcc/gcc-${VER}/gcc-${VER}.tar.xz	default"
-	"tbl	https://ftpmirror.gnu.org/gnu/gmp/gcc-${GMPVER}.tar.xz	gmp-$GMPVER.tar.xz"
-	"tbl	https://ftpmirror.gnu.org/gnu/mpc/gcc-${MPCVER}.tar.gz	mpc-$MPCVER.tar.gz"
+	"tbl	https://ftpmirror.gnu.org/gnu/gmp/gmp-${GMPVER}.tar.xz	gmp-$GMPVER.tar.xz"
+	"tbl	https://ftpmirror.gnu.org/gnu/mpc/mpc-${MPCVER}.tar.gz	mpc-$MPCVER.tar.gz"
 	"tbl	https://ftpmirror.gnu.org/gnu/mpfr/mpfr-${MPFRVER}.tar.xz	mpfr-$MPFRVER.tar.xz"
 )
 CHKSUMS=(
