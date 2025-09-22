@@ -4,13 +4,33 @@ import os
 import platform # for python_version_tuple()
 import sys
 
+from importlib.machinery import PathFinder
+from importlib.metadata import DistributionFinder
 from pathlib import Path, PurePath
 
 import installer
 from installer import install
+from installer._core import _process_WHEEL_file
 from installer.destinations import SchemeDictionaryDestination
 from installer.sources import WheelFile
 # Custom pypa installer script.
+
+# Buildroot: clean up before installing. Otherwise pyPA installer will raise an error.
+def clean(src, dest):
+	scheme = _process_WHEEL_file(src)
+	scheme_path = dest.scheme_dict[scheme]
+	context = DistributionFinder.Context(
+		name=src.distribution,
+		path=[scheme_path],
+	)
+	for path in PathFinder.find_distributions(context=context):
+		# path.files is either an iterable, or None
+		if path.files is None:
+			continue
+		for file in path.files:
+			file_path = Path(file.locate())
+			if file_path.exists():
+				file_path.unlink()
 
 def main():
 	if 'KABOOM_TOOLCHAIN_SYSROOT' not in os.environ:
@@ -49,6 +69,8 @@ def main():
 		)
 		try:
 			with WheelFile.open(file) as f:
+				print("-- Cleaning up before installing ...", file=sys.stderr)
+				clean(f, dest)
 				installer.install(
 					source=f,
 					destination=dest,
