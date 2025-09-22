@@ -28,8 +28,11 @@ configure_native2 \
 	--enable-progcomp \
 	--enable-prompt-string-decoding \
 	--enable-select \
-	--enable-translatable-strings \
-	bash_cv_func_strchrnul_works=yes
+	--enable-translatable-strings
+
+abinfo "Patching config.h ..."
+sed -i -e 's|/\* #undef HAVE_STRCHRNUL \*/|#define HAVE_STRCHRNUL 1|' \
+	"$PWD"/config.h
 
 make_build
 make_install_native
