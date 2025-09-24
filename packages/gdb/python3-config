@@ -8,9 +8,16 @@ fi
 
 # The first argument is the path to python-config.py, ignore it.
 
+if [ -z "$KABOOM_TOOLCHAIN_SYSROOT" ] ; then
+	echo "KABOOM_TOOLCHAIN_SYSROOT is not set." >&2
+	exit 1
+fi
+
+SYSROOT="$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")"
+
 case "$2" in
---includes) echo "-I/usr/include/python3.10" ;;
---ldflags) echo "-L/usr/lib/python3.10 -L/usr/lib  -lintl -ldl  -lpthread -lm -lm -lpython3.10" ;;
+--includes) echo "-I$SYSROOT/usr/include/python3.10" ;;
+--ldflags) echo "-L$SYSROOT/usr/lib/python3.10 -L$SYSROOT/usr/lib  -lintl -ldl  -lpthread -lm -lm -lpython3.10" ;;
 --exec-prefix) echo "/usr" ;;
 *) echo "Bad arg $2.  Blech!" >&2 ; exit 1 ;;
 esac

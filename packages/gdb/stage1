@@ -31,7 +31,8 @@ configure_native \
 	--with-mpfr="$KABOOM_STAGE1_SYSROOT"/usr \
 	--with-libexpat-prefix="$KABOOM_STAGE1_SYSROOT"/usr \
 	--with-gmp="$KABOOM_STAGE1_SYSROOT"/usr \
-	--with-python="$METADIR"/python3-config
+	--with-python="$METADIR"/python3-config \
+	LDFLAGS="-lintl"
 
 make_build
 make install DESTDIR="$PWD"/dist
