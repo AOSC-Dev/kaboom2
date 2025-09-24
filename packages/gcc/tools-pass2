@@ -18,6 +18,8 @@ configure_tools \
 	--enable-default-pie \
 	--enable-default-ssp \
 	--disable-nls \
+	--enable-lto \
+	--enable-plugin \
 	--enable-shared \
 	--disable-multilib \
 	--enable-threads \
