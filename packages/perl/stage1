@@ -8,6 +8,11 @@ METADIR="$(get_pkgmetadata_dir)"
 source "$METADIR"/spec
 tar --strip-components=1 -xf "$KABOOM_TOP"/sources/perl-cross-"$PERL_CROSS_VER".tar.gz
 
+# FIXME: Some perl modules will fail with undefined references to ssp
+# symbols.
+export CFLAGS="$CFLAGS -fno-stack-protector"
+export CXXFLAGS="$CXXFLAGS -fno-stack-protector"
+
 # Shadow build is not supported. This is not a standard autoconf script!
 ./configure \
 	--target="$KABOOM_TARGET_TRIPLE" \
