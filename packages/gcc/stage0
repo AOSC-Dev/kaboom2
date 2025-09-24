@@ -43,7 +43,14 @@ configure_native \
 make_build all-build CFLAGS="-O2" CXXFLAGS="-O2"
 
 # Then build everything else.
-make_build
+# FIXME: GCC still references gcc_cv_objdump when cross compiling,
+# which is non-existent. The value it probably looking for is
+# ac_cv_prog_objdump.
+# This fails libcc1 check if LTO and plugins are enabled, since it
+# tries to run target objdunmp with -T option, which then evaluates to
+# " -T".
+make_build \
+	gcc_cv_objdump="$KABOOM_TARGET_OBJDUMP"
 make_install_native
 
 abinfo "Creating cc -> gcc ..."
