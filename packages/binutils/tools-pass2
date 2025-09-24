@@ -5,6 +5,8 @@ md build-"$KABOOM_TARGET_ARCH"
 configure_tools \
 	--disable-nls \
 	--disable-werror \
+	--enable-lto \
+	--enable-plugins \
 	--enable-gprofing=no \
 	--enable-default-hash-style=gnu \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues

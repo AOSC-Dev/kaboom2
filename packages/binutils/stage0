@@ -12,6 +12,7 @@ configure_native \
 	--with-pic \
 	--enable-ld \
 	--enable-lto \
+	--enable-plugins \
 	--enable-gdb \
 	--enable-default-hash-style=gnu \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues
