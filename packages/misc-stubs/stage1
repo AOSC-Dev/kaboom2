@@ -4,7 +4,8 @@ set_trap
 abinfo "Making stubs ..."
 for bin in \
 	apt apt-cache apt-get \
-	go gem meson ninja python2 ruby; do
+	go gem meson ninja python2 ruby \
+	tclsh; do
 	ln -svf "true" \
 		"$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
 done
@@ -17,6 +18,8 @@ for bin in \
 	systemd-hwdb ; do
 	ln -svf true "$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
 done
+
+ln -sfv false "$KABOOM_STAGE1_SYSROOT"/usr/bin/oma
 
 abinfo "Creating /etc/passwd ..."
 echo "root:x:0:0:root:/root:/bin/bash" > \
