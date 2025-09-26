@@ -1,1 +1,42 @@
 #!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="alpha-kaboom-linux-gnu"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-mieee -mcpu=ev4 -O2 -fno-tree-ch"
+KABOOM_TARGET_CXXFLAGS="-mieee -mcpu=ev4 -O2 -fno-tree-ch"
+
+# Target C/C++ Preprocessor flags.
+# KABOOM_TARGET_CPPFLAGS=""
+
+# Target C++ compiler flags.
+# KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
+
+# Whether qemu user emulation is available for this target.
+# If QEMU user emulation is available, specify the entry name in
+# /proc/sys/fs/binfmt_misc.
+KABOOM_BINFMT=qemu-alpha
+
+# Skip binfmt detection on the specified architecture.
+# For example, amd64 machines can run i486 code natively.
+# KABOOM_BINFMT_SKIP=
+
+# Architecture name in the Linux kernel.
+KABOOM_KERNEL_ARCH=alpha
+
+# Whether to symlink lib64.
+# Alpha does not have a lib64 directory.
+KABOOM_LINK_LIB64=0
+
+GCC_TOOLS_DEF__ALPHA=(
+	"--disable-default-ssp"
+	"--with-cpu=ev4"
+)
+
+GCC_STAGE0_DEF__ALPHA=(
+	"--disable-default-ssp"
+	"--with-cpu=ev4"
+)
