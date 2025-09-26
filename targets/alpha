@@ -34,7 +34,7 @@ KABOOM_LINK_LIB64=0
 # OpenSSL target.
 # See Configurations/10-main.conf in OpenSSL source tree for details.
 # If in doubt, say "linux-generic(32|64) no-asm" here.
-KABOOM_OPENSSL_TARGET="linux-alpha-gcc"
+KABOOM_TARGET_OPENSSL_TARGET="linux-alpha-gcc"
 
 GCC_TOOLS_DEF__ALPHA=(
 	"--disable-default-ssp"

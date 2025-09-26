@@ -59,7 +59,7 @@ for var in \
 	KABOOM_TARGET_KERNEL_ARCH \
 	KABOOM_TARGET_CFLAGS \
 	KABOOM_TARGET_CXXFLAGS \
-	KABOOM_OPENSSL_TARGET
+	KABOOM_TARGET_OPENSSL_TARGET
 do
 	if [ -z "${!var}" ] ; then
 		undefined+=($var)
