@@ -51,6 +51,29 @@ if [ "$KABOOM_ERROR" = "1" ] ; then
 	abdie "Environment check failed. See the output above for details."
 fi
 
+abinfo "Checking for target definitions ..."
+undefined=()
+for var in \
+	KABOOM_TARGET_ARCH \
+	KABOOM_TARGET_TRIPLE \
+	KABOOM_KERNEL_ARCH \
+	KABOOM_TARGET_CFLAGS \
+	KABOOM_TARGET_CXXFLAGS \
+	KABOOM_OPENSSL_TARGET
+do
+	if [ -z "${!var}" ] ; then
+		undefined+=($var)
+	fi
+done
+if [ "${#undefined[@]}" -gt 0 ] ; then
+	aberr "The following required variables are not defined:"
+	for undef in "${undefined[@]}" ; do
+		aberr "- ‘$undef’"
+	done
+	abdie "Please check your target/"$KABOOM_TARGET_ARCH" file."
+fi
+
+
 #if [ "$_ARCH" != "$KABOOM_TARGET_ARCH" ] ; then
 #	# We are cross compiling the stage 0.
 #	CROSS_STAGE0=1
