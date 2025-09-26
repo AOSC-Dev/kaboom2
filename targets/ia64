@@ -25,7 +25,7 @@ KABOOM_TARGET_CXXFLAGS="-mtune=itanium2"
 # KABOOM_BINFMT_SKIP=
 
 # Architecture name in the Linux kernel.
-KABOOM_KERNEL_ARCH=ia64
+KABOOM_TARGET_KERNEL_ARCH=ia64
 
 # Whether to symlink lib64.
 KABOOM_LINK_LIB64=1

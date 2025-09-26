@@ -2,7 +2,7 @@
 set_trap
 
 pushd linux-*
-make ARCH="$KABOOM_KERNEL_ARCH" \
+make ARCH="$KABOOM_TARGET_KERNEL_ARCH" \
 	CROSS_COMPILE="$KABOOM_TARGET_TRIPLE"- \
 	headers
 
