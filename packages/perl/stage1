@@ -14,12 +14,16 @@ export CFLAGS="$CFLAGS -fno-stack-protector"
 export CXXFLAGS="$CXXFLAGS -fno-stack-protector"
 
 # Shadow build is not supported. This is not a standard autoconf script!
+# FIXME: Some perl modules won't import on some architectures:
+# /usr/bin/perl: symbol lookup error: /usr/lib/perl5/5.36.3/alpha-linux/auto/Encode/Encode.so: undefined symbol: __ctzdi2
+# Explicitly linking with libgcc_s for libgcc symbols.
 ./configure \
 	--target="$KABOOM_TARGET_TRIPLE" \
 	--target-tools-prefix="$KABOOM_TARGET_TRIPLE"- \
 	--prefix=/usr \
 	-Dld="$KABOOM_TARGET_TRIPLE"-ld \
 	-Dosname=linux \
-	-Dperladmin=root
+	-Dperladmin=root \
+	-Dldflags="-lgcc_s"
 make_build
 make_install_native
