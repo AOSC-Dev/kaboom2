@@ -37,7 +37,7 @@ make_install_native
 abinfo "Appending wide-character linkage to pkg-config files..."
 for lib in ncurses ncurses++ form panel menu; do
     echo "INPUT(-l${lib}w)" > "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${lib}.so
-    ln -s ${lib}w.pc "$KABOOM_STAGE0_SYSROOT"/usr/lib/pkgconfig/${lib}.pc
+    ln -svf ${lib}w.pc "$KABOOM_STAGE0_SYSROOT"/usr/lib/pkgconfig/${lib}.pc
 done
 
 abinfo "Tweaking library for wide-character linkage/reference..."
@@ -48,29 +48,29 @@ ln -sv libncurses.so "$KABOOM_STAGE0_SYSROOT"/usr/lib/libcurses.so
 
 abinfo "Creating version 5 symlinks..."
 for i in form panelw ncursesw ncurses++w menuw; do
-    ln -sv lib${i}.so.${NCURSES_SEMVER} \
+    ln -svf lib${i}.so.${NCURSES_SEMVER} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.5
 done
-ln -sv libmenuw.so.${NCURSES_SEMVER} \
+ln -svf libmenuw.so.${NCURSES_SEMVER} \
     "$KABOOM_STAGE0_SYSROOT"/usr/lib/libmenu.so.5
-ln -sv libformw.so.${NCURSES_SEMVER} \
+ln -svf libformw.so.${NCURSES_SEMVER} \
     "$KABOOM_STAGE0_SYSROOT"/usr/lib/libformw.so.5
-ln -sv libncursesw.so.${NCURSES_SEMVER} \
+ln -svf libncursesw.so.${NCURSES_SEMVER} \
     "$KABOOM_STAGE0_SYSROOT"/usr/lib/libncurses.so.5
 
 for i in tinfo tic; do
     abinfo "Creating compatibility symlinks for lib${i} ..."
-    ln -sv libncursesw.so.${NCURSES_SEMVER} \
+    ln -svf libncursesw.so.${NCURSES_SEMVER} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.${NCURSES_SEMVER%%.*}
-    ln -sv libncursesw.so.${NCURSES_SEMVER} \
+    ln -svf libncursesw.so.${NCURSES_SEMVER} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.5
-    ln -sv lib${i}.so.${NCURSES_SEMVER%%.*} \
+    ln -svf lib${i}.so.${NCURSES_SEMVER%%.*} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so
 done
 
 abinfo "Creating symlinks for pkg-configs"
 for i in tinfo tic; do
     abinfo "Creating pkg-config symlinks for lib${i} ..."
-    ln -sv ncursesw.pc "$KABOOM_STAGE0_SYSROOT"/usr/lib/pkgconfig/$i.pc
+    ln -svf ncursesw.pc "$KABOOM_STAGE0_SYSROOT"/usr/lib/pkgconfig/$i.pc
 done
 
