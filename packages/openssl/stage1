@@ -8,8 +8,7 @@ CC="$KABOOM_TARGET_CC" \
 CXX="$KABOOM_TARGET_CXX" \
 LD="$KABOOM_TARGET_LD" \
 	./Configure \
-	linux-generic64 \
-	no-asm \
+	$KABOOM_OPENSSL_TARGET \
 	--prefix=/usr \
 	--openssldir=/etc/ssl \
 	no-threads \

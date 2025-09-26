@@ -30,6 +30,11 @@ KABOOM_KERNEL_ARCH=ia64
 # Whether to symlink lib64.
 KABOOM_LINK_LIB64=1
 
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_OPENSSL_TARGET="linux-ia64"
+
 # Workaround a warning in glibc for ia64, since they are using some
 # bootstrapping implementations.
 GLIBC_TOOLS_DEF__IA64=(

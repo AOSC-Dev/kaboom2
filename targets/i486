@@ -27,6 +27,11 @@ KABOOM_BINFMT_SKIP="amd64"
 # Architecture name in the Linux kernel.
 KABOOM_KERNEL_ARCH=x86
 
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_OPENSSL_TARGET="linux-x86"
+
 GCC_TOOLS_ARCH_DEF__I486=(
 	"--with-cpu=i486"
 	"--with-tune=bonnell"
