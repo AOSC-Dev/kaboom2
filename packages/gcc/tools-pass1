@@ -19,7 +19,6 @@ configure_tools \
 	--with-zstd=no \
 	--without-isl \
 	--enable-default-pie \
-	--enable-default-ssp \
 	--disable-nls \
 	--disable-shared \
 	--disable-multilib \

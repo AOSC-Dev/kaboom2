@@ -16,7 +16,6 @@ md build-"$KABOOM_TARGET_ARCH"
 expand_arch_def
 configure_tools \
 	--enable-default-pie \
-	--enable-default-ssp \
 	--disable-nls \
 	--enable-lto \
 	--enable-plugin \
