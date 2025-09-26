@@ -60,3 +60,10 @@ make_install_native
 abinfo "Creating cc -> gcc ..."
 ln -svf gcc "$KABOOM_STAGE0_SYSROOT"/usr/bin/cc
 ln -svf g++ "$KABOOM_STAGE0_SYSROOT"/usr/bin/c++
+
+if [ -e "$KABOOM_STAGE0_SYSROOT"/usr/lib/gcc/"$KABOOM_TARGET_TRIPLE"/"$PKGVER"/liblto_plugin.so ] ; then
+	mkdir -pv "$KABOOM_STAGE0_SYSROOT"/usr/lib/bfd-plugins
+	abinfo "Symlinking LTO plugin to the bfd-plugin directory ..."
+	ln -svf ../gcc/"$KABOOM_TARGET_TRIPLE"/"$PKGVER"/liblto_plugin.so \
+		"$KABOOM_STAGE0_SYSROOT"/usr/lib/bfd-plugins/liblto_plugin.so
+fi
