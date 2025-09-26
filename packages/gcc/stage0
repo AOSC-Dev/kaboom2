@@ -23,6 +23,8 @@ done
 md build-"$KABOOM_TARGET_ARCH"
 expand_arch_def
 configure_native \
+	--libdir=/usr/lib \
+	--libexecdir=/usr/lib \
 	--enable-default-pie \
 	--enable-nls \
 	--enable-shared \
