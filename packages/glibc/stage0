@@ -43,4 +43,5 @@ METADIR="$(get_pkgmetadata_dir)"
 make_build -f "$METADIR"/Makefile.locales \
 	SYSROOT="$(realpath $KABOOM_TOOLCHAIN_SYSROOT)" \
 	TMPROOT="$PWD/tmproot" \
+	ENDIAN="$KABOOM_TARGET_ENDIANNESS" \
 	GLIBC_METADIR="$METADIR"
