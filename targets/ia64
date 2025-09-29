@@ -35,6 +35,8 @@ KABOOM_LINK_LIB64=1
 # If in doubt, say "linux-generic(32|64) no-asm" here.
 KABOOM_TARGET_OPENSSL_TARGET="linux-ia64"
 
+KABOOM_TARGET_ENDIANNESS=little
+
 # Workaround a warning in glibc for ia64, since they are using some
 # bootstrapping implementations.
 GLIBC_TOOLS_DEF__IA64=(
