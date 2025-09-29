@@ -13,8 +13,8 @@ export LC_ALL=C.UTF-8
 
 abinfo "Testing for basic programs ..."
 for prog in \
-	awk bash bison cat diff find g++ gcc gawk grep gzip ld m4 make \
-	makeinfo patch perl python3 sed tar tic yacc xz; do
+	awk bash bison cat diff fakeroot find g++ gcc gawk grep gzip ld \
+	m4 make makeinfo patch perl python3 sed tar tic yacc xz; do
 	abinfo "Testing if $prog exists ..."
 	command -v $prog > /dev/null || \
 		aberr "$prog not found."
