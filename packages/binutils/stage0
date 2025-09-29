@@ -19,12 +19,11 @@ configure_native \
 	--disable-multilib \
 	--with-build-sysroot="$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")" \
 	--enable-shared \
-	--disable-threads \
 	--with-pic \
 	--enable-ld \
 	--enable-lto \
 	--enable-plugins \
-	--enable-gdb \
+	--disable-gdb \
 	--enable-default-hash-style=gnu \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues
 make_build
