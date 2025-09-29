@@ -32,7 +32,6 @@ configure_native \
 	--enable-plugin \
 	--disable-multiarch \
 	--disable-multilib \
-	--disable-threads \
 	--enable-languages="c,c++,lto" \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues \
 	--enable-gnu-unique-object \
