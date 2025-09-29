@@ -1,6 +1,5 @@
 bison
 perl
-zlib
 openssl
 libffi
 python-3

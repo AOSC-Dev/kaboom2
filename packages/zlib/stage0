@@ -3,12 +3,12 @@ set_trap
 
 pushd zlib.git
 
+expand_arch_def
 cmake_native \
 	"$PWD" \
 	"PWD"/build-"$KABOOM_TARGET_ARCH" \
 	-DWITH_GTEST=OFF \
 	-DZLIB_COMPAT=ON \
 	-DZLIB_ENABLE_TESTS=OFF
-
 cmake_build "PWD"/build-"$KABOOM_TARGET_ARCH"
 cmake_install_native "PWD"/build-"$KABOOM_TARGET_ARCH"
