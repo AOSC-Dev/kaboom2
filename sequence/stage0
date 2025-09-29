@@ -19,5 +19,8 @@ sed
 tar
 xz
 zlib
+gmp
+mpfr
+mpc
 binutils
 gcc

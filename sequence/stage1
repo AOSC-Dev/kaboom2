@@ -5,9 +5,6 @@ libffi
 python-3
 python-setuptools
 python-pip
-gmp
-mpfr
-mpc
 pcre2
 expat
 gdb
