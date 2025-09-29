@@ -48,23 +48,23 @@ ln -sv libncurses.so "$KABOOM_STAGE0_SYSROOT"/usr/lib/libcurses.so
 
 abinfo "Creating version 5 symlinks..."
 for i in form panelw ncursesw ncurses++w menuw; do
-    ln -svf lib${i}.so.${NCURSES_SEMVER} \
+    ln -svf lib${i}.so.${PKGVER} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.5
 done
-ln -svf libmenuw.so.${NCURSES_SEMVER} \
+ln -svf libmenuw.so.${PKGVER} \
     "$KABOOM_STAGE0_SYSROOT"/usr/lib/libmenu.so.5
-ln -svf libformw.so.${NCURSES_SEMVER} \
+ln -svf libformw.so.${PKGVER} \
     "$KABOOM_STAGE0_SYSROOT"/usr/lib/libformw.so.5
-ln -svf libncursesw.so.${NCURSES_SEMVER} \
+ln -svf libncursesw.so.${PKGVER} \
     "$KABOOM_STAGE0_SYSROOT"/usr/lib/libncurses.so.5
 
 for i in tinfo tic; do
     abinfo "Creating compatibility symlinks for lib${i} ..."
-    ln -svf libncursesw.so.${NCURSES_SEMVER} \
-        "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.${NCURSES_SEMVER%%.*}
-    ln -svf libncursesw.so.${NCURSES_SEMVER} \
+    ln -svf libncursesw.so.${PKGVER} \
+        "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.${PKGVER%%.*}
+    ln -svf libncursesw.so.${PKGVER} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so.5
-    ln -svf lib${i}.so.${NCURSES_SEMVER%%.*} \
+    ln -svf lib${i}.so.${PKGVER%%.*} \
         "$KABOOM_STAGE0_SYSROOT"/usr/lib/lib${i}.so
 done
 
