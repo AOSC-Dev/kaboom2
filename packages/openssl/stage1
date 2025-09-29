@@ -11,7 +11,6 @@ LD="$KABOOM_TARGET_LD" \
 	$KABOOM_TARGET_OPENSSL_TARGET \
 	--prefix=/usr \
 	--openssldir=/etc/ssl \
-	no-threads \
 	shared \
 	no-docs \
 	no-fuzz-libfuzzer \
