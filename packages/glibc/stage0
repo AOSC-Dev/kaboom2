@@ -12,6 +12,9 @@ if bool "$KABOOM_DEBUG_LIBC" ; then
 	export CFLAGS="$CFLAGS -g"
 fi
 
+# glibc does not need time64 preprocesses.
+unset CPPFLAGS
+
 expand_arch_def
 configure_native2 \
     --enable-kernel=4.19.0 \
