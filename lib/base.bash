@@ -16,7 +16,7 @@ bool() {
 
 # If the terminal allows, set a title.
 set_title() {
-	if [ "${TERM//xterm/}" == "$TERM" ] ; then
+	if [ "${TERM//@(xterm|tmux|ghostty|kitty)/}" == "$TERM" ] ; then
 		return
 	fi
 	echo -ne "\e]0;kaboom: $@\007\r"
