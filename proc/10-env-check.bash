@@ -55,6 +55,7 @@ abinfo "Checking for target definitions ..."
 undefined=()
 for var in \
 	KABOOM_TARGET_ARCH \
+	KABOOM_TARGET_ENDIANNESS \
 	KABOOM_TARGET_TRIPLE \
 	KABOOM_TARGET_KERNEL_ARCH \
 	KABOOM_TARGET_CFLAGS \
@@ -101,6 +102,7 @@ echo	"            Job Description"
 echo	"========================================"
 echo	"Host			: $KABOOM_HOST_TRIPLE"
 echo	"Target			: $KABOOM_TARGET_TRIPLE"
+echo	"Target endianness	: $KABOOM_TARGET_ENDIANNESS endian"
 echo	"Toolchain directory	: $KABOOM_TOOLCHAIN_PREFIX"
 echo	"Build diretory		: $KABOOM_BUILD_DIR"
 echo	"Stage 0 directory	: $KABOOM_STAGE0_SYSROOT"
