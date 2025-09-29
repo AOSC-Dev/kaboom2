@@ -4,6 +4,15 @@ set_trap
 pushd "$PKGNAME"-"$PKGVER"
 md build-"$KABOOM_TARGET_ARCH"
 
+# Well, the build system can't find just-compiled libiberty on arm*
+# targets. I'm not sure why, for now just manually specify system library
+# paths when cross-compiling target binutils.
+LIBGCC_DIR="$("${KABOOM_TARGET_CC}" -print-file-name=libgcc_s.so.1)"
+LIBGCC_DIR="$(dirname "$LIBGCC_DIR")"
+export LDFLAGS="${KABOOM_TARGET_LDFLAGS} \
+	-L$PWD/libiberty/pic \
+	-L$LIBGCC_DIR -L$KABOOM_TOOLCHAIN_SYSROOT/usr/lib"
+
 configure_native \
 	--without-sysroot \
 	--disable-multiarch \
