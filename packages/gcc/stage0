@@ -11,15 +11,6 @@ if ab_match_arch ia64 ; then
 	done
 fi
 
-METADIR="$(get_pkgmetadata_dir)"
-source "$METADIR"/spec
-for p in gmp mpc mpfr ; do
-	v=${p^^}VER
-	v2=${!v}
-	abinfo "Moving $p-$v2 into $p ..."
-	mv -v "$CUR_WORKSPACE"/"$p"-"$v2" "$p"
-done
-
 md build-"$KABOOM_TARGET_ARCH"
 expand_arch_def
 configure_native \
