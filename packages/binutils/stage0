@@ -6,6 +6,8 @@ md build-"$KABOOM_TARGET_ARCH"
 
 configure_native \
 	--without-sysroot \
+	--disable-multiarch \
+	--disable-multilib \
 	--with-build-sysroot="$(realpath "$KABOOM_TOOLCHAIN_SYSROOT")" \
 	--enable-shared \
 	--disable-threads \

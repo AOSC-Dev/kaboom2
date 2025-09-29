@@ -20,6 +20,7 @@ configure_tools \
 	--enable-lto \
 	--enable-plugin \
 	--enable-shared \
+	--disable-multiarch \
 	--disable-multilib \
 	--enable-threads \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues \

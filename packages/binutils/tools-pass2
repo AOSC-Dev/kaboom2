@@ -3,6 +3,8 @@ set_trap
 pushd "$PKGNAME-$PKGVER"
 md build-"$KABOOM_TARGET_ARCH"
 configure_tools \
+	--disable-multiarch \
+	--disable-multilib \
 	--disable-nls \
 	--disable-werror \
 	--enable-lto \

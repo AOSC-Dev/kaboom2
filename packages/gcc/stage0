@@ -30,6 +30,7 @@ configure_native \
 	--enable-shared \
 	--enable-lto \
 	--enable-plugin \
+	--disable-multiarch \
 	--disable-multilib \
 	--disable-threads \
 	--enable-languages="c,c++,lto" \

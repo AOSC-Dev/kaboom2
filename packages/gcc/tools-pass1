@@ -21,6 +21,7 @@ configure_tools \
 	--enable-default-pie \
 	--disable-nls \
 	--disable-shared \
+	--disable-multiarch \
 	--disable-multilib \
 	--disable-threads \
 	--disable-libatomic \
