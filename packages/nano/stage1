@@ -14,7 +14,7 @@ md build-"$KABOOM_TARGET_ARCH"
 
 configure_native2 \
 	--enable-nls \
-	--disable-threads \
+	--enable-threads \
 	--enable-browser \
 	--enable-color \
 	--enable-comment \
