@@ -40,6 +40,10 @@ Building cross-compile toolchain
 ========================================
 "
 
+export CFLAGS="${KABOOM_HOST_CFLAGS}"
+export CXXFLAGS="${KABOOM_HOST_CXXFLAGS}"
+export CPPFLAGS="${KABOOM_HOST_CPPFLAGS}"
+
 export CFLAGS_FOR_TARGET="$KABOOM_TARGET_CFLAGS"
 export CXXFLAGS_FOR_TARGET="$KABOOM_TARGET_CXXFLAGS"
 
