@@ -7,7 +7,7 @@ md build-"$KABOOM_TARGET_ARCH"
 PKG_CONFIG_PATH="$KABOOM_TARGET_PKGCONFIG" \
 	configure_native2 \
 	--with-openssl \
-	--disable-threads \
+	--enable-threads \
 	--disable-threaded-resolver \
 	--without-libpsl \
 	--with-ca-bundle=/etc/ssl/ca-bundle.crt
