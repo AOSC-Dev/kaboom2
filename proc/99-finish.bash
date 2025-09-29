@@ -1,3 +1,7 @@
+if [ -n "$KABOOM_CONTINUE_STAGE" ] ; then
+	abdie "Reached the end of the kaboom sequence. Argument for -c option is invalid."
+fi
+
 echo "
 ========================================
 Creating /etc/os-release

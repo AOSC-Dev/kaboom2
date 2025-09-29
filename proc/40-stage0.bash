@@ -17,3 +17,8 @@ export CPPFLAGS="$KABOOM_TARGET_CPPFLAGS -O2"
 execute_sequence || {
 	abdie "Sequence ‘$KABOOM_CUR_STAGE’ failed."
 }
+
+# Clear the continuation flag
+if [ -n "$KABOOM_CONTINUE_STAGE" ] ; then
+	unset KABOOM_CONTINUE_STAGE KABOOM_CONTINUE_PACKAGE
+fi
