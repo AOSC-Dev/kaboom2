@@ -260,7 +260,7 @@ verify_and_download() {
 	if [ "$srctype" = "git" ] ; then
 		abinfo "$srcname: Upadting Git repository ..."
 		git --git-dir="$dl_dir"/"$srcname" \
-			fetch --tags --all
+			fetch --tags --force origin 'refs/heads/*:refs/heads/*'
 	fi
 }
 
