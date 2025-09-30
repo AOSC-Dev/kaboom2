@@ -31,6 +31,8 @@ KABOOM_TARGET_KERNEL_ARCH=alpha
 # Alpha does not have a lib64 directory.
 KABOOM_LINK_LIB64=0
 
+KABOOM_TARGET_ENDIANNESS=little
+
 # OpenSSL target.
 # See Configurations/10-main.conf in OpenSSL source tree for details.
 # If in doubt, say "linux-generic(32|64) no-asm" here.
