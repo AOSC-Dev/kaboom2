@@ -1,1 +1,50 @@
 #!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="powerpc-kaboom-linux-gnu"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-m32 -mcpu=603 -mtune=G4 -mno-altivec -mno-vsx -msecure-plt -mhard-float"
+KABOOM_TARGET_CXXFLAGS="-m32 -mcpu=603 -mtune=G4 -mno-altivec -mno-vsx -msecure-plt -mhard-float"
+
+# Target C/C++ Preprocessor flags.
+KABOOM_TARGET_CPPFLAGS="-D_LARGEFILE_SOURCE -D_TIME_OFFSET_BITS=64 -D_FILE_OFFSET_BITS=64"
+
+# Whether qemu user emulation is available for this target.
+# If QEMU user emulation is available, specify the entry name in
+# /proc/sys/fs/binfmt_misc.
+KABOOM_BINFMT=qemu-ppc
+
+# Skip binfmt detection on the specified architecture.
+# For example, amd64 machines can run i486 code natively.
+# KABOOM_BINFMT_SKIP=
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=powerpc
+
+# Endianness.
+KABOOM_TARGET_ENDIANNESS=big
+
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_TARGET_OPENSSL_TARGET="linux-ppc"
+
+GCC_TOOLS_DEF__POWERPC=(
+	"--with-cpu=G3"
+	"--with-tune=G4"
+        "--with-long-double-128"
+)
+GCC_STAGE0_DEF__POWERPC=(
+	"--with-cpu=G3"
+	"--with-tune=G4"
+        "--with-long-double-128"
+)
+
+ZLIB_STAGE1_DEF__POWERPC=(
+	"-DWITH_ALTIVEC=OFF"
+	"-DWITH_POWER8=OFF"
+	"-DWITH_POWER9=OFF"
+)
