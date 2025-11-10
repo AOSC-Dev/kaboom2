@@ -9,6 +9,7 @@ make_build \
 	CC="$KABOOM_TARGET_CC" \
 	AR="$KABOOM_TARGET_AR" \
 	RANLIB="$KABOOM_TARGET_RANLIB" \
+	CFLAGS="${CFLAGS} -fPIC" \
 	libbz2.a bzip2 bzip2recover
 
 abinfo "Installing ..."
