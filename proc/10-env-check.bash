@@ -74,29 +74,6 @@ if [ "${#undefined[@]}" -gt 0 ] ; then
 	abdie "Please check your target/"$KABOOM_TARGET_ARCH" file."
 fi
 
-
-#if [ "$_ARCH" != "$KABOOM_TARGET_ARCH" ] ; then
-#	# We are cross compiling the stage 0.
-#	CROSS_STAGE0=1
-#	abinfo "Cross compiling from $_HOST_TRIPLE to $_TARGET"
-if systemd-detect-virt -qc ; then
-	abwarn "Make sure the host system has $_BINFMT registered in binfmt_misc registry."
-elif [ -n "${KABOOM_BINFMT_SKIP}" ] && [ "${KABOOM_BINFMT_SKIP/$KABOOM_HOST_ARCH/}" != "${KABOOM_BINFMT_SKIP}" ] ; then
-	if [ "$KABOOM_TARGET_ARCH" = "arm64" ] ; then
-		abwarn "Be aware that not all AArch64 processors are capable of running AArch32 binaries natively."
-		abwarn "Please check if your machine supports 32-bit EL0 and EL1 before continuing."
-	else
-		abinfo "Target binaries can run natively. No binfmt support is required."
-	fi
-elif [ "$KABOOM_NATIVE_STAGE1" = "1" ] && [ -z "$KABOOM_BINFMT" ]; then
-	aberr "QEMU user emulation is not available for current architecture.\n" \
-	"Try running kaboom with '-s stage0' to produce a minimal stage 0 environment."
-	abdie "Otherwise, disable native stage1 builds to proceed."
- 	elif [ ! -e /proc/sys/fs/binfmt_misc/"$KABOOM_BINFMT" ] ; then
-	aberr "Binfmt entry $KABOOM_BINFMT does not exist in /proc/sys/fs/binfmt_misc."
-	abdie "Make sure the corresponding qemu-user-static package is installed."
-fi
-
 echo	"========================================"
 echo	"            Job Description"
 echo	"========================================"
