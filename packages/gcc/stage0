@@ -11,6 +11,7 @@ if ab_match_arch ia64 ; then
 	done
 fi
 
+export LDFLAGS="$LDFLAGS -lm"
 md build-"$KABOOM_TARGET_ARCH"
 expand_arch_def
 configure_native \
