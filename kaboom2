@@ -142,6 +142,7 @@ fi
 KABOOM_HOST_ARCH=$(dpkg --print-architecture)
 KABOOM_HOST_TRIPLE="$(dirname $(gcc --print-prog-name=cc1))"
 KABOOM_HOST_TRIPLE="$(basename $(realpath $KABOOM_HOST_TRIPLE/..))"
+KABOOM_HOST_TRIPLE="${KABOOM_HOST_TRIPLE/-aosc/}"
 export KABOOM_HOST_TRIPLE KABOOM_HOST_ARCH
 
 abinfo "Host architecture: $KABOOM_HOST_ARCH"
