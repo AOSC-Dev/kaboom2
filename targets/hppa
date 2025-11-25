@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="hppa-kaboom-linux-gnu"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-march=1.1"
+KABOOM_TARGET_CXXFLAGS="-march=1.1"
+
+# Target C/C++ Preprocessor flags.
+# KABOOM_TARGET_CPPFLAGS=""
+
+# Target C++ compiler flags.
+# KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
+
+# Whether qemu user emulation is available for this target.
+# If QEMU user emulation is available, specify the entry name in
+# /proc/sys/fs/binfmt_misc.
+KABOOM_BINFMT=qemu-hppa
+
+# Skip binfmt detection on the specified architecture.
+# For example, amd64 machines can run i486 code natively.
+# KABOOM_BINFMT_SKIP=
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=parisc
+
+# Whether to symlink lib64.
+# Alpha does not have a lib64 directory.
+KABOOM_LINK_LIB64=0
+
+KABOOM_TARGET_ENDIANNESS=big
+
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_TARGET_OPENSSL_TARGET="linux-generic32"
+
+GCC_TOOLS_DEF__ALPHA=(
+	"--disable-default-ssp"
+	"--with-arch=1.1"
+)
+
+GCC_STAGE0_DEF__ALPHA=(
+	"--disable-default-ssp"
+	"--with-arch=1.1"
+)
