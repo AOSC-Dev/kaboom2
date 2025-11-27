@@ -28,3 +28,14 @@ configure_native \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues
 make_build
 make_install_native
+
+abinfo "Moving ldscripts to /usr/lib ..."
+mv -v "$KABOOM_TOOLCHAIN_SYSROOT"/usr/"$KABOOM_TARGET_TRIPLE"/lib/ldscripts \
+	"$KABOOM_TOOLCHAIN_SYSROOT"/usr/lib/
+
+# Well, it causes problems for later bootstrapping...
+# libm.so.6 needed by /usr/lib/gcc/TRIPLE/15/libstdc++.so.6
+# attempt to open no/usr/lib/libm.so.6 failed
+# [more attempt to open no/ prefixed locations follows]
+abinfo "Removing redundant installation at multilib locations ..."
+rm -rv "$KABOOM_TOOLCHAIN_SYSROOT"/usr/"$KABOOM_TARGET_TRIPLE"
