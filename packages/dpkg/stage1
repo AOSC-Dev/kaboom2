@@ -20,7 +20,10 @@ abinfo "Generating configure script ..."
 ./autogen || abdie "Failed to run autogen."
 
 md build-"$KABOOM_TARGET_ARCH"
+# WARN: dpkg put status files under /usr/var/lib/dpkg ...
+# Explicit specificaiton required!
 configure_native2 \
+	--localstatedir=/var \
 	--with-libz \
 	--with-liblzma \
 	--with-libzstd
