@@ -10,11 +10,9 @@ done
 
 md build-"$KABOOM_TARGET_ARCH"
 
-# undefined reference to `libintl_dgettext'.
 configure_native2 \
 	--program-prefix=eu- \
 	--disable-install-elfh \
-	--disable-debuginfod \
-	LDFLAGS="-lintl"
+	--disable-debuginfod
 make_build
 make_install_native
