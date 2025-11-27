@@ -19,7 +19,6 @@ configure_native \
 	--libexecdir=/usr/lib \
 	--enable-default-pie \
 	--enable-nls \
-	--with-libintl-type=static \
 	--enable-shared \
 	--enable-lto \
 	--enable-plugin \
