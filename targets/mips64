@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Target description for Big endian MIPS-III based machines
+# You probably want to run this port on SGI machines.
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="mips64-kaboom-linux-gnuabi64"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-march=mips3 -mtune=r5000 -mips3 -mabi=64 -mhard-float -mfix-r4000 -mfix-r4400 -EB"
+
+# Target C/C++ Preprocessor flags.
+# KABOOM_TARGET_CPPFLAGS=""
+
+# Target C++ compiler flags.
+KABOOM_TARGET_CXXFLAGS="$KABOOM_TARGET_CFLAGS"
+
+# Whether qemu user emulation is available for this target.
+# If QEMU user emulation is available, specify the entry name in
+# /proc/sys/fs/binfmt_misc.
+KABOOM_BINFMT=qemu-mips64
+
+# Skip binfmt detection on the specified architecture.
+# For example, amd64 machines can run i486 code natively.
+# KABOOM_BINFMT_SKIP=
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=mips
+
+# Whether to symlink lib64.
+KABOOM_LINK_LIB64=1
+
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_TARGET_OPENSSL_TARGET="linux64-mips64"
+
+KABOOM_TARGET_ENDIANNESS=big
+
+GCC_TOOLS_DEF__LOONGSON2F=(
+	"--with-arch=mips3"
+	"--with-abi=64"
+	"--with-tune=r5000"
+)
+GCC_STAGE0_DEF__LOONGSON2F=(
+	"--with-arch=mips3"
+	"--with-abi=64"
+	"--with-tune=r5000"
+)
