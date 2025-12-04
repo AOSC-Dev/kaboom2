@@ -1,10 +1,11 @@
 MAINLINE_ARCHS=(
-	amd64 arm64 loongarch64 loongson3 ppc64el riscv64
+	amd64 arm64 loongarch64 loongson3 ppc64el riscv64 mips64r6el
 )
 
 RETRO_ARCHS=(
-	alpha armv4 armv6hf armv7hf i486 ia64 loongson2f m68k powerpc ppc64
+	alpha armv4 armv6hf armv7hf hppa i486 ia64 loongson2f m68k mips32r6el mips64 powerpc ppc64 sparc64
 )
+
 ab_match_arch() {
 	[ "$1" = "$KABOOM_TARGET_ARCH" ]
 }
