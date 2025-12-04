@@ -29,6 +29,9 @@ KABOOM_BINFMT=qemu-mips64
 # Architecture name in the Linux kernel.
 KABOOM_TARGET_KERNEL_ARCH=mips
 
+# Output of `uname -m` for the target.
+KABOOM_TARGET_UNAME_M=mips64
+
 # Whether to symlink lib64.
 KABOOM_LINK_LIB64=1
 
