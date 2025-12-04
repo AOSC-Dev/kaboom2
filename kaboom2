@@ -139,6 +139,10 @@ else
 	export KABOOM_TARGET_TRIPLE="${KABOOM_TARGET_TRIPLE}"
 fi
 
+if [ -z "$KABOOM_TARGET_UNAME_M" ] ; then
+	KABOOM_TARGET_UNAME_M="$KABOOM_TARGET_KERNEL_ARCH"
+fi
+
 KABOOM_HOST_ARCH=$(dpkg --print-architecture)
 KABOOM_HOST_TRIPLE="$(dirname $(gcc --print-prog-name=cc1))"
 KABOOM_HOST_TRIPLE="$(basename $(realpath $KABOOM_HOST_TRIPLE/..))"
