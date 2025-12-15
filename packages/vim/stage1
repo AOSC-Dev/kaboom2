@@ -3,6 +3,7 @@ set_trap
 
 pushd vim.git
 
+# FIXME: Build system not detecting target strip.
 configure_native2 \
     --localstatedir=/var/lib/vim \
     --with-features=huge \
@@ -21,7 +22,8 @@ configure_native2 \
     --disable-tclinterp \
     --disable-xim \
     --disable-fontset \
-    --with-tlib="ncursesw"
+    --with-tlib="ncursesw" \
+    STRIP="$KABOOM_TARGET_STRIP"
 
 make_build
 make_install_native VIMRCLOC=/etc
