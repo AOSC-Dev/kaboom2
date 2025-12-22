@@ -1,0 +1,6 @@
+VER=1.13.2
+SRCS=(
+	"git	https://github.com/ninja-build/ninja	default	tags/v${VER}"
+)
+
+CHKSUMS="SKIP"

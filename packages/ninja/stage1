@@ -1,0 +1,13 @@
+#!/bin/bash
+set_trap
+
+pushd ninja.git
+cmake_native \
+	"$PWD" \
+	"$PWD"/build-"$KABOOM_TARGET_ARCH" \
+	-DBUILD_TESTING=OFF
+
+cmake_build \
+	"$PWD"/build-"$KABOOM_TARGET_ARCH"
+cmake_install_native \
+	"$PWD"/build-"$KABOOM_TARGET_ARCH"

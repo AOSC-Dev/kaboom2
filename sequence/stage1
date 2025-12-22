@@ -26,6 +26,7 @@ fastfetch
 autoconf
 automake
 bzip2
+ninja
 cmake
 nlohmann-json
 elfutils
