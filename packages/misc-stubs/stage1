@@ -4,7 +4,7 @@ set_trap
 abinfo "Making stubs ..."
 for bin in \
 	apt apt-cache apt-get \
-	go gem meson ninja python2 ruby \
+	go gem meson python2 ruby \
 	tclsh; do
 	ln -svf "true" \
 		"$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
