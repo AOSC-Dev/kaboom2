@@ -24,7 +24,7 @@ configure_native \
 	--enable-plugin \
 	--disable-multiarch \
 	--disable-multilib \
-	--enable-languages="c,c++,lto" \
+	--enable-languages="c,c++,lto,d,ada" \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues \
 	--enable-gnu-unique-object \
 	--enable-linker-build-id \

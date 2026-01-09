@@ -26,7 +26,7 @@ configure_tools \
 	--with-bugurl=https://github.com/AOSC-Dev/kaboom2/issues \
 	--enable-gnu-unique-object \
 	--enable-linker-build-id \
-	--enable-languages="c,c++" \
+	--enable-languages="c,c++,d,ada" \
 	LDFLAGS="-lm" LIBS="-lm"
 make_build
 make_install_tools
