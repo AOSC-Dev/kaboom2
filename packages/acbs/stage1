@@ -32,3 +32,9 @@ mkdir -pv "$KABOOM_STAGE1_SYSROOT"/usr/lib/gcc/specs
 pushd "$KABOOM_STAGE1_SYSROOT"/tree/core-devel/gcc/02-compiler/overrides/usr/lib/gcc/specs
 find -type f -exec install -Dvm644 {} "$KABOOM_STAGE1_SYSROOT"/usr/lib/gcc/specs/{} \;
 popd
+
+abinfo "Creating directories ..."
+mkdir -pv "$KABOOM_STAGE1_SYSROOT"/debs
+mkdir -pv "$KABOOM_STAGE1_SYSROOT"/tree
+mkdir -pv "$KABOOM_STAGE1_SYSROOT"/var/cache/acbs/build
+mkdir -pv "$KABOOM_STAGE1_SYSROOT"/var/cache/acbs/tarballs
