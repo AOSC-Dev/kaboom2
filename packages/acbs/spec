@@ -1,6 +1,6 @@
-VER=20251101
+VER=20251231-git20260119
 SRCS=(
-	"git	https://github.com/AOSC-Dev/acbs	default	tags/${VER}"
+	"git	https://github.com/AOSC-Dev/acbs	default	2b91476093b0daa26dbe7bed38452b427e9cdc08"
 	"git	https://github.com/AOSC-Dev/aosc-os-abbs	aosc-os-abbs.git stable"
 )
 CHKSUMS=(
