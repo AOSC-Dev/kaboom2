@@ -9,9 +9,5 @@ binutils pass2
 gcc pass2
 # A same version of Python must exist if we are cross compiling Python.
 python-3
-# Same for file.
-file
-# Same for gettext.
-gettext
 # For obtaining runtime dependencies for target.
 pkgconf
