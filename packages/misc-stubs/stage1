@@ -25,8 +25,8 @@ ln -sfv false "$KABOOM_STAGE1_SYSROOT"/usr/bin/oma
 
 abinfo "Creating necessary stubs for aosc-aaa ..."
 for bin in \
-	useradd
-	usermod
+	useradd \
+	usermod \
 	groupadd ; do
 	ln -svf true "$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
 done
