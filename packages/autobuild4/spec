@@ -1,6 +1,6 @@
-VER=4.14.0-git20260118
+VER=4.15.1
 SRCS=(
-	"git	https://github.com/AOSC-Dev/autobuild4	default	a0c6b129455a10cd772589fe6b3713d8259d2ac6"
+	"git	https://github.com/AOSC-Dev/autobuild4	default	tags/v${VER}"
 )
 CHKSUMS=(
 	"SKIP"
