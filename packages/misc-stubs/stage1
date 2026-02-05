@@ -1,6 +1,8 @@
 #!/bin/bash
 set_trap
 
+METADIR="$(get_pkgmetadata_dir)"
+
 abinfo "Making stubs ..."
 for bin in \
 	apt apt-cache apt-get \
@@ -32,8 +34,8 @@ for bin in \
 done
 
 abinfo "Creating /etc/passwd ..."
-echo "root:x:0:0:root:/root:/bin/bash" > \
+cp -v "$METADIR"/passwd \
 	"$KABOOM_STAGE1_SYSROOT"/etc/passwd
 abinfo "Creating /etc/group ..."
-echo "root:x:0:" > \
+cp -v "$METADIR"/group \
 	"$KABOOM_STAGE1_SYSROOT"/etc/group
