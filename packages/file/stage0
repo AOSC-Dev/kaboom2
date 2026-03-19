@@ -1,7 +1,9 @@
 #!/bin/bash
 set_trap
 
-pushd "$PKGNAME"-"$PKGVER"
+pushd "$PKGNAME".git
+NOCONFIGURE=1 autoreconf -fvis
+
 md build-"$KABOOM_TARGET_ARCH"
 
 configure_native2 \
