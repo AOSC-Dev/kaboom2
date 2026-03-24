@@ -16,7 +16,7 @@ configure_native2 \
     --enable-netbeans \
     --enable-perlinterp=dynamic \
     --enable-pythoninterp=no \
-    --enable-python3interp=dynamic \
+    --enable-python3interp=no \
     --disable-rubyinterp \
     --disable-luainterp \
     --disable-tclinterp \
