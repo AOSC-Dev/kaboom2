@@ -7,6 +7,7 @@ md build-"$KABOOM_TARGET_ARCH"
 # Buildroot: override some configure checks.
 # These can't be assumed.
 configure_native2 \
+	--enable-shared \
 	--with-build-python="$KABOOM_TOOLCHAIN_PREFIX"/bin/python3 \
 	--disable-pydoc \
 	--with-ensurepip \
