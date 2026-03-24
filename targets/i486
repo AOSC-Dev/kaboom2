@@ -33,7 +33,7 @@ KABOOM_TARGET_UNAME_M=i486
 # OpenSSL target.
 # See Configurations/10-main.conf in OpenSSL source tree for details.
 # If in doubt, say "linux-generic(32|64) no-asm" here.
-KABOOM_TARGET_OPENSSL_TARGET="linux-x86"
+KABOOM_TARGET_OPENSSL_TARGET="linux-x86-latomic"
 
 KABOOM_TARGET_ENDIANNESS=little
 
