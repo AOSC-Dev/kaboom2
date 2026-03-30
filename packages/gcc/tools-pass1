@@ -12,7 +12,6 @@ if ab_match_arch ia64 ; then
 fi
 
 md build-"$KABOOM_TARGET_ARCH"
-expand_arch_def
 configure_tools \
 	--with-newlib \
 	--without-headers \
