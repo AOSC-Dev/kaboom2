@@ -37,6 +37,15 @@ KABOOM_TARGET_OPENSSL_TARGET="linux-ia64"
 
 KABOOM_TARGET_ENDIANNESS=little
 
+# FIXME: libphobos is unsupported on ia64.
+GCC_TOOLS_DEF__IA64=(
+	"--enable-languages=c,c++,ada"
+)
+
+GCC_STAGE0_DEF__IA64=(
+	"--enable-languages=c,c++,ada"
+)
+
 # Workaround a warning in glibc for ia64, since they are using some
 # bootstrapping implementations.
 GLIBC_TOOLS_DEF__IA64=(
