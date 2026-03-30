@@ -4,10 +4,6 @@ set_trap
 pushd "$PKGNAME"-"$PKGVER"
 
 METADIR=$(get_pkgmetadata_dir)
-for patch in "$METADIR"/*.patch ; do
-	abinfo "Applying ‘$(basename $patch)’ ..."
-	patch -Np1 < "$patch" || abdie "Failed to apply patch ‘$(basename $patch)’."
-done
 
 # NOTE: Forcing the build system to build with standard <stdbool.h>.
 # Otherwise you will get a bunch of redifinition errors in C++, since
@@ -28,8 +24,7 @@ configure_native2 \
 	--enable-ext-colors \
 	--enable-ext-mouse \
 	--enable-ext-putwin \
-	--with-versioned-syms \
-	cf_cv_header_stdbool_h=1
+	--with-versioned-syms
 
 make_build
 make_install_native
