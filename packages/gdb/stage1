@@ -34,4 +34,4 @@ configure_native \
 	--with-python="$METADIR"/python3-config
 
 make_build
-make install DESTDIR="$PWD"/dist
+make_install_native
