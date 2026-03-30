@@ -1,13 +1,14 @@
 #!/bin/bash
 set_trap
 pushd "$PKGNAME"-"$PKGVER"
-md build-"$KABOM_TARGET_ARCH"
+md build-"$KABOOM_TARGET_ARCH"
 
 configure_native2 \
 	--enable-multibyte \
 	--enable-shared \
 	--disable-install-examples \
-	--with-curses
+	--with-curses \
+	--with-shared-termcap-library=-lncursesw
 
 make_build
 make_install_native
