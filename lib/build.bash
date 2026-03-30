@@ -95,24 +95,24 @@ _configure() {
 configure_tools() {
 	abinfo "$PKGNAME: Running configure for host toolchain ..."
 	_configure "${KABOOM_AUTOTOOLS_TOOLS_DEF[@]}" \
-		"${ARCH_DEF[@]}" \
-		"$@" || abdie \
+		"$@" \
+		"${ARCH_DEF[@]}" || abdie \
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
 }
 
 configure_tools2() {
 	abinfo "$PKGNAME: Running configure for host applications ..."
 	_configure "${KABOOM_AUTOTOOLS_TOOLS_DEF2[@]}" \
-		"${ARCH_DEF[@]}" \
-		"$@" || abdie \
+		"$@" \
+		"${ARCH_DEF[@]}" || abdie \
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
 }
 
 configure_native() {
 	abinfo "$PKGNAME: Running configure for native toolchain ..."
 	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF[@]}" \
-		"${ARCH_DEF[@]}" \
-		"$@" || abdie \
+		"$@" \
+		"${ARCH_DEF[@]}" || abdie \
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
 }
 
@@ -120,8 +120,8 @@ configure_native() {
 configure_native2() {
 	abinfo "$PKGNAME: Running configure for native applications ..."
 	_configure "${KABOOM_AUTOTOOLS_NATIVE_DEF2[@]}" \
-		"${ARCH_DEF[@]}" \
-		"$@" || abdie \
+		"$@" \
+		"${ARCH_DEF[@]}" || abdie \
 		"Autotools configuration failed for ‘$PKGNAME-$PKGVER’ during sequence ‘$KABOOM_CUR_STAGE’."
 }
 
