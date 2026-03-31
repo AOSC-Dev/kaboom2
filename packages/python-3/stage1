@@ -2,6 +2,8 @@
 set_trap
 
 pushd Python-"$PKGVER"
+
+apply_patches
 md build-"$KABOOM_TARGET_ARCH"
 
 # Buildroot: override some configure checks.
