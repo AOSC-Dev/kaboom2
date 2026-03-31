@@ -33,6 +33,18 @@ get_pkgmetadata_dir() {
 	realpath "$KABOOM_TOP/packages/$pkgname"
 }
 
+apply_patches() {
+	local meta="$(get_pkgmetadata_dir)"
+	abinfo "Applying patches ..."
+	for patch in $(find "$meta" -maxdepth 1 -type f -name '*.patch*') ; do
+		if [ "${patch%%.patch}" != "$patch" ] || \
+			[ "${patch%%.patch.$KABOOM_TARGET_ARCH}" != "$patch" ] ; then
+			abinfo "Applying $patch ..."
+			patch -Np1 < "$patch" || abdie "Patch failed!"
+		fi
+	done
+}
+
 # $1: full path to the spec file.
 # $2: command to execute. The commans will be executed in a subshell, arguments are:
 # 	COMMAND srctype srcname url chksum_algo chksum_name
