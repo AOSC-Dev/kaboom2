@@ -4,13 +4,7 @@ set_trap
 # Re-compile a version of GCC that is (mostly) full-featured.
 pushd "$PKGNAME-$PKGVER"
 
-if ab_match_arch ia64 ; then
-	abinfo "Applying patches ..."
-	METADIR="$(get_pkgmetadata_dir)"
-	for patch in "$METADIR"/*.patch.ia64 ; do
-		patch -Np1 < "$patch"
-	done
-fi
+apply_patches
 
 md build-"$KABOOM_TARGET_ARCH"
 expand_arch_def
