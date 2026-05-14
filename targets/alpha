@@ -39,11 +39,13 @@ KABOOM_TARGET_ENDIANNESS=little
 KABOOM_TARGET_OPENSSL_TARGET="linux-alpha-gcc"
 
 GCC_TOOLS_DEF__ALPHA=(
+	"--enable-languages=c,c++,lto"
 	"--disable-default-ssp"
 	"--with-cpu=ev4"
 )
 
 GCC_STAGE0_DEF__ALPHA=(
+	"--enable-languages=c,c++,lto"
 	"--disable-default-ssp"
 	"--with-cpu=ev4"
 )
