@@ -3,8 +3,10 @@ set_trap
 
 pushd autobuild4.git
 
+# NOTE: AB_NATIVE_ARCH requires explicit definition when cross compiling.
 cmake_native "$PWD" "$PWD"/build-"$KABOOM_TARGET_ARCH" \
-	-DSYSCONF_INSTALL_DIR=/etc
+	-DSYSCONF_INSTALL_DIR=/etc \
+	-DAB_NATIVE_ARCH_NAME="$KABOOM_TARGET_ARCH"
 cmake_build "$PWD"/build-"$KABOOM_TARGET_ARCH"
 # FIXME: Must specify DESTDIR, otherwise the plugin will be installed to /usr.
 env DESTDIR="$KABOOM_STAGE1_SYSROOT" \
