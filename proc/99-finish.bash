@@ -46,9 +46,36 @@ fakeroot \
 
 echo "
 ========================================
+Archiving toolchain
+========================================
+"
+abinfo "Copying sysroot to $KABOOM_TOOLCHAIN_DIR/sysroot ..."
+unlink "$KABOOM_TOOLCHAIN_DIR"/sysroot
+mkdir "$KABOOM_TOOLCHAIN_DIR"/sysroot
+rsync -avP --no-i-r --info=progress2 \
+	"$KABOOM_STAGE1_SYSROOT"/ \
+	"$KABOOM_TOOLCHAIN_DIR"/sysroot/
+abinfo "Archiving the toolchain directory ..."
+tar -cJf "$KABOOM_TOP"/kaboom-toolchain-"$KABOOM_TARGET_ARCH-$(date "+%Y%m%d")".tar.xz \
+	-C "$KABOOM_TOOLCHAIN_DIR" \
+	.
+
+echo "
+========================================
+Cleaning up
+========================================
+"
+rm -rf "$KABOOM_STAGE0_SYSROOT"
+rm -rf "$KABOOM_STAGE1_SYSROOT"
+rm -rf "$KABOOM_BUILD_DIR"
+rm -rf "$KABOOM_TOOLCHAIN_DIR"
+
+echo "
+========================================
 Stage 1 finished!
 ========================================
 "
 abinfo "Output file: kaboom-stage1-$KABOOM_TARGET_ARCH-$(date "+%Y%m%d").tar.xz"
+abinfo "Target toolchain: $KABOOM_TOP/kaboom-toolchain-"$KABOOM_TARGET_ARCH-$(date "+%Y%m%d")".tar.xz"
 abinfo "Target: $KABOOM_TARGET_ARCH ($KABOOM_TARGET_TRIPLE)"
 set_title "Finished!"
