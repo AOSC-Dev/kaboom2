@@ -15,15 +15,6 @@ KABOOM_TARGET_CXXFLAGS="-march=mips64r6 -mcompact-branches=always"
 # Target C++ compiler flags.
 # KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
 
-# Whether qemu user emulation is available for this target.
-# If QEMU user emulation is available, specify the entry name in
-# /proc/sys/fs/binfmt_misc.
-KABOOM_BINFMT=qemu-mips64el
-
-# Skip binfmt detection on the specified architecture.
-# For example, amd64 machines can run i486 code natively.
-# KABOOM_BINFMT_SKIP=
-
 # Architecture name in the Linux kernel.
 KABOOM_TARGET_KERNEL_ARCH=mips
 

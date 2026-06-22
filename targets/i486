@@ -15,15 +15,6 @@ KABOOM_TARGET_CPPFLAGS="-D_LARGEFILE_SOURCE -D_TIME_OFFSET_BITS=64 -D_FILE_OFFSE
 # Target C++ compiler flags.
 # KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
 
-# Whether qemu user emulation is available for this target.
-# If QEMU user emulation is available, specify the entry name in
-# /proc/sys/fs/binfmt_misc.
-KABOOM_BINFMT=qemu-i386
-
-# Skip binfmt detection on the specified architecture.
-# For example, amd64 machines can run i486 code natively.
-KABOOM_BINFMT_SKIP="amd64"
-
 # Architecture name in the Linux kernel.
 KABOOM_TARGET_KERNEL_ARCH=x86
 
