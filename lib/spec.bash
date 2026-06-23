@@ -206,6 +206,7 @@ verify_source() {
 	local file="$1"
 	local hash_algo="$2"
 	local expected="$3"
+	local noerr="$4"
 	# If the file does not exist, return false (triggers the download).
 	if [ ! -e "$dl_dir"/"$file" ] ; then
 		abinfo "Source code ‘$file’ does not exist yet, downloading ..."
@@ -218,6 +219,9 @@ verify_source() {
 	hash_value=($(hash_file "$file" "$hash_algo"))
 
 	if [ "${hash_value[0]}" != "$expected" ] ; then
+		if [ "$noerr" ] ; then
+			return 1
+		fi
 		abdie "Error: hash value mismatch ($hash_algo) !\n\tExpected: $expected\n\tActual: ${hash_value[0]}"
 	fi
 	return 0
@@ -225,7 +229,7 @@ verify_source() {
 
 download_file() {
 	local dl_dir="$KABOOM_TOP"/sources
-	wget -O "$dl_dir"/"$2" "$1"
+	wget --timeout=5 --tries=5 -O "$dl_dir"/"$2" "$1" || return 1
 }
 
 git_bare_clone() {
@@ -239,10 +243,10 @@ download_source() {
 	local srcurl="$3"
 	case "$srctype" in
 		tbl|file)
-			download_file "$srcurl" "$srcname"
+			download_file "$srcurl" "$srcname" || return 1
 			;;
 		git)
-			git_bare_clone "$srcurl" "$srcname"
+			git_bare_clone "$srcurl" "$srcname" || return 1
 			;;
 		*)
 			abdie "Unknown source type ‘$srctype’."
@@ -257,15 +261,21 @@ verify_and_download() {
 	local srcurl="$3"
 	local chksum_algo="$4"
 	local chksum_val="$5"
-	if ! verify_source "$srcname" "$chksum_algo" "$chksum_val" ; then
+	local tries=0
+	local noerr=noerr
+	while ! verify_source "$srcname" "$chksum_algo" "$chksum_val" "$noerr" ; do
 		if [ -f "$dl_dir"/"$srcname" ] ; then
 			rm -f "$dl_dir"/"$srcname"
 		fi
 		if [ -d "$dl_dir"/"$srcname" ] ; then
 			rm -rf "$dl_dir"/"$srcname"
 		fi
-		download_source "$srctype" "$srcname" "$srcurl"
-	fi
+		download_source "$srctype" "$srcname" "$srcurl" || abdie "Failed to download $srcurl: wget returned $?."
+		tries=$(( tries + 1 ))
+		if [ "$tries" -gt 3 ]; then
+			noerr=""
+		fi
+	done
 	abinfo "Verifying integrity of source file ‘$srcname’ ..."
 	verify_source "$srcname" "$chksum_algo" "$chksum_val"
 	abinfo "Checksum verified."
