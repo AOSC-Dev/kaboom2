@@ -1,4 +1,4 @@
-VER=20241119
+VER=20260206
 SRCS=(
 	"file	https://hg.mozilla.org/mozilla-central/raw-file/fc857d1685f9cd017a2cf656a52d871b02a4cc89/security/nss/lib/ckfw/builtins/certdata.txt	certdata.txt"
 )
