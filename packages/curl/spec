@@ -1,8 +1,8 @@
-VER=8.16.0
+VER=8.20.0
 SRCS=(
 	"tbl	https://curl.se/download/curl-${VER}.tar.xz	default"
 )
 CHKSUMS=(
-	"sha256 40c8cddbcb6cc6251c03dea423a472a6cea4037be654ba5cf5dec6eb2d22ff1d"
+	"sha256 63fe2dc148ba0ceae89922ef838f7e5c946272c2e78b7c59fab4b79d3ce2b896"
 )
 CHKUPDATE="anitya::id=381"
