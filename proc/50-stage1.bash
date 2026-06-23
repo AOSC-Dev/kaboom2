@@ -25,6 +25,6 @@ execute_sequence || {
 }
 
 # Clear the continuation flag
-if [ -n "$KABOOM_CONTINUE_STAGE" ] ; then
+if [ -n "$KABOOM_CONTINUE_STAGE" ] && [ "$KABOOM_CONTINUE_STAGE" == "$KABOOM_CUR_STAGE" ] ; then
 	unset KABOOM_CONTINUE_STAGE KABOOM_CONTINUE_PACKAGE
 fi
