@@ -1,8 +1,8 @@
-VER=9.7
+VER=9.11
 SRCS=(
 	"tbl	https://ftpmirror.gnu.org/gnu/coreutils/coreutils-${VER}.tar.xz	default"
 )
 CHKSUMS=(
-	"sha256 e8bb26ad0293f9b5a1fc43fb42ba970e312c66ce92c1b0b16713d7500db251bf"
+	"sha256 394024eda0a5955217ceda9cd1201e65dc8fa3aa29c2951135a49521d57c3cc3"
 )
 CHKUPDATE="anitya::id=343"
