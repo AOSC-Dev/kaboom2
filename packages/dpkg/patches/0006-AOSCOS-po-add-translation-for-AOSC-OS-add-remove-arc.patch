@@ -1,0 +1,43 @@
+From 172d6766abdd5ba758bd834c1fa32f86dbdafdce Mon Sep 17 00:00:00 2001
+From: eatradish <sakiiily@aosc.io>
+Date: Tue, 7 May 2024 17:55:11 +0800
+Subject: [PATCH 6/7] AOSCOS: po: add translation for AOSC OS
+ --{add,remove}-architecture options
+
+Co-authored-by: Mingcong Bai <jeffbai@aosc.io>
+---
+ po/zh_CN.po | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/po/zh_CN.po b/po/zh_CN.po
+index 6842dfa45..6400ebf47 100644
+--- a/po/zh_CN.po
++++ b/po/zh_CN.po
+@@ -25,7 +25,7 @@ msgstr ""
+ "Content-Type: text/plain; charset=UTF-8\n"
+ "Content-Transfer-Encoding: 8bit\n"
+ "Plural-Forms: nplurals=1; plural=0;\n"
+-"X-Generator: Poedit 3.2.2\n"
++"X-Generator: Poedit 3.4.1\n"
+ 
+ #: lib/dpkg/ar.c
+ msgid "failed to fstat archive"
+@@ -5653,12 +5653,15 @@ msgid ""
+ "--add-architecture is not supported in AOSC OS. Please contact AOSC OS "
+ "maintainers for any problems encountered."
+ msgstr ""
++"AOSC OS 不支持 --add-architecture 选项。如有任何需要，请联系 AOSC OS 开发者。"
+ 
+ #: src/main/main.c
+ msgid ""
+ "--remove-architecture is not supported in AOSC OS. Please contact AOSC OS "
+ "maintainers for any problems encountered."
+ msgstr ""
++"AOSC OS 不支持 --remove-architecture 选项。如有任何需要，请联系 AOSC OS 开发"
++"者。"
+ 
+ #: src/main/main.c
+ #, fuzzy, c-format
+-- 
+2.52.0
+

@@ -16,6 +16,11 @@ for arch in armv4 armv6hf armv7hf i486 loongarch64 loongson2f loongson3 ; do
 	fi
 done
 
+for patchfile in $(find "$METADIR"/patches -type f -name '*.patch') ; do
+	abinfo "Applying patch $patchfile ..."
+	patch -Np1 < "$patchfile"
+done
+
 abinfo "Generating configure script ..."
 ./autogen || abdie "Failed to run autogen."
 
