@@ -121,25 +121,17 @@ configure_native2() {
 
 # Remove libtool archives.
 cleanup_la_tools() {
+	local d
 	abinfo "Cleaning up libtool .la archives in the toolchain prefix ..."
-	find "$KABOOM_TOOLCHAIN_PREFIX"/lib \
-		-type f \
-		-name '*.la' \
-		-exec rm -v {} \;
-	find "$KABOOM_TOOLCHAIN_PREFIX"/"$KABOOM_TARGET_ARCH"/lib \
-		-type f \
-		-name '*.la' \
-		-exec rm -v {} \;
-	find "$KABOOM_TOOLCHAIN_PREFIX"/libexec \
-		-type f \
-		-name '*.la' \
-		-exec rm -v {} \;
-	if [ -d "$KABOOM_TOOLCHAIN_PREFIX"/lib64 ] ; then
-		find "$KABOOM_TOOLCHAIN_PREFIX"/lib64 \
-			-type f \
-			-name '*.la' \
-			-exec rm -v {} \;
-	fi
+	for d in "$KABOOM_TOOLCHAIN_PREFIX"/lib \
+		"$KABOOM_TOOLCHAIN_PREFIX"/lib64 \
+		"$KABOOM_TOOLCHAIN_PREFIX"/libexec \
+		"$KABOOM_TOOLCHAIN_PREFIX"/"$KABOOM_TARGET_TRIPLE"/lib ; do
+		if [ ! -d "$d" ] ; then
+			return 0
+		fi
+		find "$d" -type f -name '*.la' -exec rm -v {} \;
+	done
 }
 
 # Remove libtool archives.
