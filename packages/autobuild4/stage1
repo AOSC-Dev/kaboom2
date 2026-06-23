@@ -15,3 +15,7 @@ env DESTDIR="$KABOOM_STAGE1_SYSROOT" \
 
 abinfo "Setting prefix in the configuration ..."
 echo "/usr/lib/autobuild4" > "$KABOOM_STAGE1_SYSROOT"/etc/autobuild/prefix
+
+abinfo "Enabling bootstrap ..."
+echo "ABSTAGE2=1" >> "$KABOOM_STAGE1_SYSROOT"/etc/autobuild/ab4cfg.sh
+echo "__AB_BOOTSTRAP=1" >> "$KABOOM_STAGE1_SYSROOT"/etc/autobuild/ab4cfg.sh
