@@ -52,7 +52,7 @@ Archiving toolchain
 abinfo "Copying sysroot to $KABOOM_TOOLCHAIN_DIR/sysroot ..."
 unlink "$KABOOM_TOOLCHAIN_DIR"/sysroot
 mkdir "$KABOOM_TOOLCHAIN_DIR"/sysroot
-rsync -avP --no-i-r --info=progress2 \
+rsync -a --no-i-r --info=progress2 \
 	"$KABOOM_STAGE1_SYSROOT"/ \
 	"$KABOOM_TOOLCHAIN_DIR"/sysroot/
 abinfo "Archiving the toolchain directory ..."
@@ -79,3 +79,17 @@ abinfo "Output file: kaboom-stage1-$KABOOM_TARGET_ARCH-$(date "+%Y%m%d").tar.xz"
 abinfo "Target toolchain: $KABOOM_TOP/kaboom-toolchain-"$KABOOM_TARGET_ARCH-$(date "+%Y%m%d")".tar.xz"
 abinfo "Target: $KABOOM_TARGET_ARCH ($KABOOM_TARGET_TRIPLE)"
 set_title "Finished!"
+
+cat << EOF
+========================================
+Next step
+========================================
+
+1. Create a directory for the stage 1 environment with root.
+2. Extract the system environment:
+   cd dir
+   sudo tar xf $KABOOM_TOP/kaboom-stage1-"$KABOOM_TARGET_ARCH-$(date "+%Y%m%d")".tar.xz"
+3. Enter the stage1 environment with systemd-nspawn(1) or arch-chroot.
+4. Replace the MTER= maintainer information in /etc/autobuild4/ab4cfg.sh.
+5. Run 'WAVE=0 /tree/bootstrap-list.sh' to start bootstrapping AOSC OS.
+EOF
