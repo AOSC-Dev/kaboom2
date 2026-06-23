@@ -9,7 +9,7 @@ make_build
 make_install_tools
 
 abinfo "Installing host modules ..."
-python3 -m pip install --upgrade \
+python3 -m pip install \
 	flit-core \
 	setuptools \
 	platformdirs \
@@ -20,5 +20,6 @@ python3 -m pip install --upgrade \
 	click \
 	build \
 	installer \
-	pybind11
+	pybind11 || \
+	abdie "Failed to install host modules."
 popd
