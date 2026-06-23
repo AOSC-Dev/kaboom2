@@ -14,7 +14,8 @@ export LC_ALL=C.UTF-8
 abinfo "Testing for basic programs ..."
 for prog in \
 	awk bash bison cat diff fakeroot find g++ gcc gawk grep gzip ld \
-	m4 make makeinfo patch perl python3 sed tar tic yacc xz; do
+	m4 make makeinfo patch perl python3 sed tar tic yacc xz \
+	python3; do
 	abinfo "Testing if $prog exists ..."
 	command -v $prog > /dev/null || \
 		aberr "$prog not found."
@@ -38,7 +39,7 @@ echo $'#include <stdio.h>\nint main(){printf ("Test\\n");return 0;}' > dummy.c &
 if [ ! -x dummy ]; then
 	aberr "gcc failed to produce a binary ..."
 fi
-abinfo "Testing if gcc produces a binary ..."
+abinfo "Testing if g++ produces a binary ..."
 echo $'#include <iostream>\nint main(){std::cout << "Test" << std::endl;return 0;}' > dummy.cpp && \
 	g++ -o dummy dummy.cpp
 if [ ! -x dummy ]; then
@@ -46,6 +47,10 @@ if [ ! -x dummy ]; then
 fi
 rm -f dummy.c dummy.cpp dummy
 popd
+
+if ! /usr/bin/python3 -c 'from installer import install' ; then
+	aberr "Python module ‘installer’ not found; Install python-installer first."
+fi
 
 if [ "$KABOOM_ERROR" = "1" ] ; then
 	abdie "Environment check failed. See the output above for details."
