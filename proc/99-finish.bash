@@ -90,6 +90,6 @@ Next step
    cd dir
    sudo tar xf $KABOOM_TOP/kaboom-stage1-"$KABOOM_TARGET_ARCH-$(date "+%Y%m%d")".tar.xz"
 3. Enter the stage1 environment with systemd-nspawn(1) or arch-chroot.
-4. Replace the MTER= maintainer information in /etc/autobuild4/ab4cfg.sh.
-5. Run 'WAVE=0 /tree/bootstrap-list.sh' to start bootstrapping AOSC OS.
+4. Replace the MTER= maintainer information in /etc/autobuild/ab4cfg.sh.
+5. Run 'WAVE=1 /tree/group/bootstrap-list.sh' to start bootstrapping AOSC OS.
 EOF
