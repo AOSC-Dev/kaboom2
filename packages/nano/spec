@@ -1,4 +1,4 @@
-VER=9.0
+VER=9.1
 SRCS=(
 	"git	git://https.git.savannah.gnu.org/nano.git	default	tags/v${VER}"
 	"git	https://github.com/Quentium-Forks/nanorc	nanorc	tags/2024.1.16"
