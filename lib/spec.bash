@@ -229,7 +229,7 @@ verify_source() {
 
 download_file() {
 	local dl_dir="$KABOOM_TOP"/sources
-	wget --timeout=5 --tries=5 -O "$dl_dir"/"$2" "$1" || return 1
+	wget $WGET_OPTS --timeout=5 --tries=5 -O "$dl_dir"/"$2" "$1" || return 1
 }
 
 git_bare_clone() {
