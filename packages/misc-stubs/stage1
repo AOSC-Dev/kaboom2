@@ -6,7 +6,7 @@ METADIR="$(get_pkgmetadata_dir)"
 abinfo "Making stubs ..."
 for bin in \
 	apt apt-cache apt-get \
-	go gem meson python2 \
+	go gem python2 \
 	tclsh; do
 	ln -svf "true" \
 		"$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
