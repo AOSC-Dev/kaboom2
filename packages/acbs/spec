@@ -1,4 +1,4 @@
-VER=20260728
+VER=20260729
 SRCS=(
 	"git	https://github.com/AOSC-Dev/acbs	default	$VER"
 	"git	https://github.com/AOSC-Dev/aosc-os-abbs	aosc-os-abbs.git stable"
