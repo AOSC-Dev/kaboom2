@@ -20,5 +20,5 @@ configure_native2 \
 	ac_cv_fread_reads_directories=yes \
 	ac_cv_snprintf_returns_bogus=yes
 
-make_build
-make_install_native
+make_build NO_RUST=1
+make_install_native NO_RUST=1
