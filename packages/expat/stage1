@@ -1,7 +1,11 @@
 #!/bin/bash
 set_trap
 
-pushd "$PKGNAME"-"$PKGVER"
+# Strange ... the project lives in a subdirectory.
+pushd "$PKGNAME".git/expat
+abinfo "Regenerating configure ..."
+autoreconf -fvis
+
 md build-"$KABOOM_TARGET_ARCH"
 
 configure_native2
