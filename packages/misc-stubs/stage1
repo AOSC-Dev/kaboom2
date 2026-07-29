@@ -21,10 +21,6 @@ for bin in \
 	ln -svf true "$KABOOM_STAGE1_SYSROOT"/usr/bin/"$bin"
 done
 
-abinfo "Forcing acbs to use apt ..."
-# NOTE: oma shouldn't exist before stage 2 ...
-ln -sfv false "$KABOOM_STAGE1_SYSROOT"/usr/bin/oma
-
 abinfo "Creating necessary stubs for aosc-aaa ..."
 for bin in \
 	useradd \
