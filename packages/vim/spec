@@ -1,4 +1,4 @@
-VER=9.2.0680
+VER=9.2.0870
 SRCS=(
 	"git	https://github.com/vim/vim.git	default	v${VER}"
 )
