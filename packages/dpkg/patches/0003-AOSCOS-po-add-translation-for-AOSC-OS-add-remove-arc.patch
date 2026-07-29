@@ -1,7 +1,7 @@
-From 172d6766abdd5ba758bd834c1fa32f86dbdafdce Mon Sep 17 00:00:00 2001
+From 258521ea6f4dbd768e31ee03ea73e9ea27bc3d11 Mon Sep 17 00:00:00 2001
 From: eatradish <sakiiily@aosc.io>
 Date: Tue, 7 May 2024 17:55:11 +0800
-Subject: [PATCH 6/7] AOSCOS: po: add translation for AOSC OS
+Subject: [PATCH 3/5] AOSCOS: po: add translation for AOSC OS
  --{add,remove}-architecture options
 
 Co-authored-by: Mingcong Bai <jeffbai@aosc.io>
@@ -39,5 +39,5 @@ index 6842dfa45..6400ebf47 100644
  #: src/main/main.c
  #, fuzzy, c-format
 -- 
-2.52.0
+2.55.0
 
