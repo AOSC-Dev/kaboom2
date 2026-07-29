@@ -1,4 +1,4 @@
-VER=4.19.0
+VER=4.19.1
 SRCS=(
 	"git	https://github.com/AOSC-Dev/autobuild4	default	v${VER}"
 )
