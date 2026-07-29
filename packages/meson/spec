@@ -1,0 +1,7 @@
+VER=1.11.2
+SRCS=(
+	"git	https://github.com/mesonbuild/meson	default ${VER}"
+)
+CHKSUMS=(
+	"SKIP"
+)

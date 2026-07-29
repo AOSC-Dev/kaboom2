@@ -5,6 +5,7 @@ libffi
 python-3
 python-setuptools
 python-pip
+meson
 pcre2
 expat
 gdb
