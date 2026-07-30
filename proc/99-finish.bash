@@ -81,6 +81,7 @@ abinfo "Target: $KABOOM_TARGET_ARCH ($KABOOM_TARGET_TRIPLE)"
 set_title "Finished!"
 
 cat << EOF
+
 ========================================
 Next step
 ========================================
@@ -88,8 +89,8 @@ Next step
 1. Create a directory for the stage 1 environment with root.
 2. Extract the system environment:
    cd dir
-   sudo tar xf $KABOOM_TOP/kaboom-stage1-"$KABOOM_TARGET_ARCH-$(date "+%Y%m%d")".tar.xz"
+   sudo tar xf $KABOOM_TOP/kaboom-stage1-$KABOOM_TARGET_ARCH-$(date "+%Y%m%d").tar.xz"
 3. Enter the stage1 environment with systemd-nspawn(1) or arch-chroot.
 4. Replace the MTER= maintainer information in /etc/autobuild/ab4cfg.sh.
-5. Run 'WAVE=1 /tree/group/bootstrap-list.sh' to start bootstrapping AOSC OS.
+5. Run 'WAVE=1 /tree/groups/bootstrap-list.sh' to start bootstrapping AOSC OS.
 EOF
