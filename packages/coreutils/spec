@@ -1,6 +1,6 @@
 VER=9.11
 SRCS=(
-	"tbl	https://ftpmirror.gnu.org/gnu/coreutils/coreutils-${VER}.tar.xz	default"
+	"tbl	https://ftp.gnu.org/gnu/coreutils/coreutils-${VER}.tar.xz	default"
 )
 CHKSUMS=(
 	"sha256 394024eda0a5955217ceda9cd1201e65dc8fa3aa29c2951135a49521d57c3cc3"

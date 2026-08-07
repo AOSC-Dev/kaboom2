@@ -1,6 +1,6 @@
 VER=5.3
 SRCS=(
-	"tbl	https://ftpmirror.gnu.org/gnu/bash/bash-5.3.tar.gz	default"
+	"tbl	https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz	default"
 	"git	https://github.com/AOSC-Dev/bash-config	bash-config.git	master"
 )
 CHKSUMS=(
