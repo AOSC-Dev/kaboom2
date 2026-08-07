@@ -8,9 +8,10 @@ configure_tools2 \
 make_build
 make_install_tools
 
+# FIXME: pyparsing is not yet compatible with flit-core>=4.
 abinfo "Installing host modules ..."
 python3 -m pip install \
-	flit-core \
+	'flit-core<4' \
 	setuptools \
 	platformdirs \
 	pep517 \
