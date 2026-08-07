@@ -280,7 +280,7 @@ verify_and_download() {
 	verify_source "$srcname" "$chksum_algo" "$chksum_val"
 	abinfo "Checksum verified."
 	if [ "$srctype" = "git" ] ; then
-		abinfo "$srcname: Upadting Git repository ..."
+		abinfo "$srcname: Updating Git repository ..."
 		git --git-dir="$dl_dir"/"$srcname" \
 			fetch --tags --force origin 'refs/heads/*:refs/heads/*'
 	fi
