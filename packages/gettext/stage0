@@ -18,7 +18,8 @@ configure_native2 \
 	--disable-native-java \
 	--disable-csharp \
 	--without-emacs \
-	--disable-modula2
+	--disable-modula2 \
+	--disable-d
 
 make_build
 make_install_native
