@@ -31,6 +31,7 @@ for p in packages/* ; do
 done
 
 method_change_pkgs=()
+changed_pkgs=()
 
 echo "[+] Found ${#pkgs[@]} packages."
 
@@ -74,7 +75,10 @@ for pkg in "${pkgs[@]}" ; do
 		echo "Old method: $OLD_METHOD"
 		echo "New method: $NEW_METHOD"
 		method_change_pkgs+=("$pkg")
+	else
+		changed_pkgs+=("$pkg")
 	fi
+
 	if [  "${OLD_METHOD}${NEW_METHOD}" = "tbltbl" ]; then
 		NEW_CHKSUM="${ABBS_CHKSUMS[0]}"
 		NEW_CHKSUM="${NEW_CHKSUM##*::}"
@@ -90,3 +94,12 @@ if [ "${#method_change_pkgs[@]}" -gt "0" ] ; then
 	echo "  ${method_change_pkgs[@]}"
 	echo "Please update the checksum manually or switch to Git."
 fi
+
+cat << EOF
+You can run the following command to commit your changes:
+
+for p in ${changed_pkgs[*]} ; do
+	source packages/\$p/spec
+	git commit -m "\$p: update to \$VER" packages/\$p
+done
+EOF
