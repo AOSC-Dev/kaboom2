@@ -1,4 +1,4 @@
-VER=3.5.2
+VER=3.5.3
 SRCS=(
 	"git	https://github.com/htop-dev/htop.git	default	${VER}"
 )
