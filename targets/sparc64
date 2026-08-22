@@ -6,8 +6,8 @@
 KABOOM_TARGET_TRIPLE="sparc64-kaboom-linux-gnu"
 
 # Target C Compiler flags.
-KABOOM_TARGET_CFLAGS="-mcpu=ultrasparc -mvis -m64 -mcmodel=medany -O2 -fno-tree-ch"
-KABOOM_TARGET_CXXFLAGS="-mcpu=ultrasparc -mvis -m64 -mcmodel=medany -O2 -fno-tree-ch"
+KABOOM_TARGET_CFLAGS="-mcpu=ultrasparc -mvis -m64 -mcmodel=medany"
+KABOOM_TARGET_CXXFLAGS="-mcpu=ultrasparc -mvis -m64 -mcmodel=medany"
 
 # Target C/C++ Preprocessor flags.
 # KABOOM_TARGET_CPPFLAGS=""

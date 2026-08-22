@@ -6,8 +6,8 @@
 KABOOM_TARGET_TRIPLE="alpha-kaboom-linux-gnu"
 
 # Target C Compiler flags.
-KABOOM_TARGET_CFLAGS="-mieee -mcpu=ev4 -O2 -fno-tree-ch"
-KABOOM_TARGET_CXXFLAGS="-mieee -mcpu=ev4 -O2 -fno-tree-ch"
+KABOOM_TARGET_CFLAGS="-mieee -mcpu=ev4"
+KABOOM_TARGET_CXXFLAGS="-mieee -mcpu=ev4"
 
 # Target C/C++ Preprocessor flags.
 # KABOOM_TARGET_CPPFLAGS=""
