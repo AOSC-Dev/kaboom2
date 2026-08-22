@@ -1,4 +1,4 @@
-VER=2.66.0
+VER=2.67.1
 SRCS=(
 	"git	https://github.com/fastfetch-cli/fastfetch	default	${VER}"
 )
