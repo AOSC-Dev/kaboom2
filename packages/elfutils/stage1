@@ -2,11 +2,6 @@
 set_trap
 
 pushd "$PKGNAME"-"$PKGVER"
-METADIR=$(get_pkgmetadata_dir)
-for patch in "$METADIR"/*.patch ; do
-	abinfo "Applying ‘$(basename $patch)’ ..."
-	patch -Np1 < "$patch" || abdie "Failed to apply patch ‘$(basename $patch)’."
-done
 
 md build-"$KABOOM_TARGET_ARCH"
 
