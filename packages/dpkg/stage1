@@ -5,6 +5,11 @@ pushd dpkg.git
 
 METADIR="$(get_pkgmetadata_dir)"
 
+for patchfile in $(find "$METADIR"/patches -type f -name '*.patch') ; do
+	abinfo "Applying patch $patchfile ..."
+	patch -Np1 < "$patchfile"
+done
+
 for arch in armv4 armv6hf armv7hf i486 loongarch64 loongson2f loongson3 ; do
 	if ab_match_arch "$arch" ; then
 		abinfo "Applying dpkg patch for $arch ..."
@@ -14,11 +19,6 @@ for arch in armv4 armv6hf armv7hf i486 loongarch64 loongson2f loongson3 ; do
 		done
 		break
 	fi
-done
-
-for patchfile in $(find "$METADIR"/patches -type f -name '*.patch') ; do
-	abinfo "Applying patch $patchfile ..."
-	patch -Np1 < "$patchfile"
 done
 
 abinfo "Generating configure script ..."
