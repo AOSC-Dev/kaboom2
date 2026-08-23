@@ -1,1 +1,44 @@
 #!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="mips64el-kaboom-linux-gnuabi64"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-mabi=64 -march=mips3 -mtune=loongson2f -mloongson-mmi -Wa,-mfix-loongson2f-nop"
+KABOOM_TARGET_CXXFLAGS="-mabi=64 -march=mips3 -mtune=loongson2f -mloongson-mmi -Wa,-mfix-loongson2f-nop"
+
+# Target C/C++ Preprocessor flags.
+# KABOOM_TARGET_CPPFLAGS=""
+
+# Target C++ compiler flags.
+# KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=mips
+
+# Output of `uname -m` for the target.
+KABOOM_TARGET_UNAME_M=mips64
+
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_TARGET_OPENSSL_TARGET="linux64-mips64"
+
+# Whether to symlink lib64.
+KABOOM_LINK_LIB64=1
+
+KABOOM_TARGET_ENDIANNESS=little
+
+GCC_TOOLS_DEF__LOONGSON2F=(
+	'--with-abi=64'
+	'--with-arch=mips3'
+	'--with-tune=loongson2f'
+)
+
+GCC_STAGE0_DEF__LOONGSON2F=(
+	'--with-abi=64'
+	'--with-arch=mips3'
+	'--with-tune=loongson2f'
+)
