@@ -1,6 +1,11 @@
 #!/bin/bash
 set_trap
 
+# FIXME: (m68k) File a bug at some point.
+if ab_match_arch m86k ; then
+	export CFLAGS="${CFLAGS/-mtune=68020-60/}"
+fi
+
 pushd "$PKGNAME"-"$PKGVER"
 md build-"$KABOOM_TARGET_ARCH"
 
