@@ -3,7 +3,7 @@ MAINLINE_ARCHS=(
 )
 
 RETRO_ARCHS=(
-	alpha armv4 armv6hf armv7hf hppa i486 ia64 loongson2f m68k mips32r6el mips64 powerpc ppc64 sparc64
+	alpha armv4 armv5te armv6hf armv7hf hppa i486 ia64 loongson2f m68k mips32r6el mips64 powerpc ppc64 sparc64
 )
 
 ab_match_arch() {

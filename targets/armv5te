@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="armv5l-kaboom-linux-gnueabi"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-march=armv5te -mtune=arm926ej-s"
+KABOOM_TARGET_CXXFLAGS="-march=armv5te -mtune=arm926ej-s"
+
+# Target C/C++ Preprocessor flags.
+KABOOM_TARGET_CPPFLAGS="-D_LARGEFILE_SOURCE -D_TIME_OFFSET_BITS=64 -D_FILE_OFFSET_BITS=64"
+
+# Target C++ compiler flags.
+# KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=arm
+KABOOM_TARGET_UNAME_M=armv5l
+
+# Whether to symlink lib64.
+KABOOM_LINK_LIB64=0
+
+# OpenSSL target.
+# NOTE: OpenSSL uses `linux-armv4' across all arm targets.
+# Use -march to generate code for other future variants.
+KABOOM_TARGET_OPENSSL_TARGET="linux-armv4"
+
+KABOOM_TARGET_ENDIANNESS=little
+
+GCC_TOOLS_DEF__ARMV5TE=(
+	"--enable-default-ssp"
+	"--with-arch=armv5te"
+	"--with-tune=arm926ej-s"
+	"--with-float=soft"
+)
+
+GCC_STAGE0_DEF__ARMV5TE=(
+	"--enable-default-ssp"
+	"--with-arch=armv5te"
+	"--with-tune=arm926ej-s"
+	"--with-float=soft"
+)
