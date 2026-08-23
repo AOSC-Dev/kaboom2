@@ -29,12 +29,12 @@ KABOOM_TARGET_ENDIANNESS=big
 # If in doubt, say "linux-generic(32|64) no-asm" here.
 KABOOM_TARGET_OPENSSL_TARGET="linux-generic32"
 
-GCC_TOOLS_DEF__ALPHA=(
+GCC_TOOLS_DEF__HPPA=(
 	"--disable-default-ssp"
 	"--with-arch=1.1"
 )
 
-GCC_STAGE0_DEF__ALPHA=(
+GCC_STAGE0_DEF__HPPA=(
 	"--disable-default-ssp"
 	"--with-arch=1.1"
 )
