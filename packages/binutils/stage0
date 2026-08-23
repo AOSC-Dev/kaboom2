@@ -2,6 +2,19 @@
 set_trap
 
 pushd "$PKGNAME"-"$PKGVER"
+
+# Note - from Linux From Scratch:
+#
+#   Binutils building system relies on an shipped libtool copy to link against
+#   internal static libraries, but the libiberty and zlib copies shipped in the
+#   package do not use libtool. This inconsistency may cause produced binaries
+#   mistakenly linked against libraries from the host distro.
+#
+#  
+# Link: https://www.linuxfromscratch.org/lfs/view/13.0-systemd/chapter06/binutils-pass2.html
+sed -e '6031s/$add_dir//' \
+    -i ltmain.sh
+
 md build-"$KABOOM_TARGET_ARCH"
 
 # Well, the build system can't find just-compiled libiberty on arm*
