@@ -6,8 +6,9 @@
 KABOOM_TARGET_TRIPLE="armv6l-kaboom-linux-gnueabihf"
 
 # Target C Compiler flags.
-KABOOM_TARGET_CFLAGS="-march=armv6 -mfloat-abi=hard"
-KABOOM_TARGET_CXXFLAGS="-march=armv6 -mfloat-abi=hard"
+KABOOM_TARGET_CFLAGS="-march=armv6t2+vfpv2 -mfloat-abi=hard"
+KABOOM_TARGET_CXXFLAGS="-march=armv6t2+vfpv2 -mfloat-abi=hard"
+KABOOM_TARGET_ASFLAGS="-march=armv6t2+vfpv2"
 
 # Target C/C++ Preprocessor flags.
 KABOOM_TARGET_CPPFLAGS="-D_LARGEFILE_SOURCE -D_TIME_OFFSET_BITS=64 -D_FILE_OFFSET_BITS=64"
