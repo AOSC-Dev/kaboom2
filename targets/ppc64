@@ -1,1 +1,44 @@
 #!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+KABOOM_TARGET_TRIPLE="powerpc64-kaboom-linux-gnu"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-m64 -mcpu=powerpc64 -mtune=G5 -maltivec -mno-vsx -mabi=ibmlongdouble -msecure-plt -mhard-float"
+KABOOM_TARGET_CXXFLAGS="-m64 -mcpu=powerpc64 -mtune=G5 -maltivec -mno-vsx -mabi=ibmlongdouble -msecure-plt -mhard-float"
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=powerpc
+
+# Endianness.
+KABOOM_TARGET_ENDIANNESS=big
+
+# Output of `uname -m` for the target.
+KABOOM_TARGET_UNAME_M="ppc64"
+
+# Whether to symlink lib64.
+KABOOM_LINK_LIB64=1
+
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_TARGET_OPENSSL_TARGET="linux-ppc64"
+
+GCC_TOOLS_DEF__PPC64=(
+	"--with-cpu=powerpc64"
+	"--with-tune=G5"
+        "--with-long-double-128"
+)
+GCC_STAGE0_DEF__PPC64=(
+	"--with-cpu=powerpc64"
+	"--with-tune=G5"
+        "--with-long-double-128"
+)
+
+ZLIB_STAGE0_DEF__PPC64=(
+	"-DWITH_ALTIVEC=ON"
+	"-DWITH_POWER8=OFF"
+	"-DWITH_POWER9=OFF"
+)
