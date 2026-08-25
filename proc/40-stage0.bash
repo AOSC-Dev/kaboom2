@@ -19,6 +19,7 @@ Building stage0 sysroot
 export CFLAGS="$KABOOM_TARGET_CFLAGS -O2"
 export CXXFLAGS="$KABOOM_TARGET_CXXFLAGS -O2"
 export CPPFLAGS="$KABOOM_TARGET_CPPFLAGS -O2"
+export ASFLAGS="$KABOOM_TARGET_ASFLAGS"
 
 execute_sequence || {
 	abdie "Sequence ‘$KABOOM_CUR_STAGE’ failed."
