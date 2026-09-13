@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Target triple. For stage1 environment and cross toolchain, the vendor
+# should be 'kaboom'.
+# Vendor will be replaced with 'aosc' if the stage 1 will be cross-compiled.
+#
+# Suffix-less sh3 implies little endian. We are building for little endian.
+#
+# Windows CE uses little endian and at least some of our target devices will
+# require JLime, which runs atop Windows CE.
+KABOOM_TARGET_TRIPLE="sh3-kaboom-linux-gnu"
+
+# Target C Compiler flags.
+KABOOM_TARGET_CFLAGS="-m3 -ml -mieee"
+KABOOM_TARGET_CXXFLAGS="-m3 -ml -mieee"
+
+# Target C/C++ Preprocessor flags.
+KABOOM_TARGET_CPPFLAGS="-D_LARGEFILE_SOURCE -D_TIME_OFFSET_BITS=64 -D_FILE_OFFSET_BITS=64"
+
+# Target C++ compiler flags.
+# KABOOM_TARGET_CXXFLAGS="$KABOOM_TGT_CFLAGS"
+
+# Architecture name in the Linux kernel.
+KABOOM_TARGET_KERNEL_ARCH=sh
+
+# Output of `uname -m` for the target.
+KABOOM_TARGET_UNAME_M=sh3
+
+# OpenSSL target.
+# See Configurations/10-main.conf in OpenSSL source tree for details.
+# If in doubt, say "linux-generic(32|64) no-asm" here.
+KABOOM_TARGET_OPENSSL_TARGET="linux-latomic"
+
+KABOOM_TARGET_ENDIANNESS=little
+
+GCC_TOOLS_DEF__SH3=(
+	"--with-cpu=sh3"
+	"--with-endian=little"
+	"--enable-default-ssp"
+	# FIXME: Something is broken with the default multilib list,
+	# causing GCC to fail to link against crti.o and -lc.
+	"--with-multilib-list="
+	# FIXME: libphobos is unsupported and ...
+	#
+	# Ada is broken:
+	#
+	# fatal error, run-time library not installed correctly
+	# cannot locate file system.ads
+	# compilation abandoned
+	"--enable-languages=c,c++,lto"
+)
+
+GCC_STAGE0_DEF__SH3=(
+	"--with-cpu=sh3"
+	"--with-endian=little"
+	"--enable-default-ssp"
+	# FIXME: Something is broken with the default multilib list,
+	# causing GCC to fail to link against crti.o and -lc.
+	"--with-multilib-list="
+	# FIXME: libphobos is unsupported and ...
+	#
+	# Ada is broken:
+	#
+	# fatal error, run-time library not installed correctly
+	# cannot locate file system.ads
+	# compilation abandoned
+	"--enable-languages=c,c++,lto"    
+)
