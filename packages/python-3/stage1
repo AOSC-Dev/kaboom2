@@ -6,6 +6,13 @@ pushd Python-"$PKGVER"
 apply_patches
 md build-"$KABOOM_TARGET_ARCH"
 
+# FIXME: error: unable to find a register to spill in class 'R0_REGS'
+if ab_match_arch sh3; then
+	# Note: Just a quick-n-dirty way to get rid of -O2.
+	export CPPFLAGS=""
+	export CFLAGS="${CFLAGS/-O2/-O0}"
+fi
+
 # Buildroot: override some configure checks.
 # These can't be assumed.
 configure_native2 \
