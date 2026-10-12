@@ -3,6 +3,6 @@ SRCS=(
 	"tbl	https://ftp.gnu.org/gnu/gcc/gcc-${VER}/gcc-${VER}.tar.xz	default"
 )
 CHKSUMS=(
-	"sha256	"
+	"sha256	e6738e29597f733270731aa90600f37ffdc045079dfc27ec7e8192cc81085c3e"
 )
 CHKUPDATE="anitya::id=6502"
