@@ -1,4 +1,4 @@
-VER=3.0.5
+VER=3.0.7
 SRCS=(
 	"git https://github.com/pkgconf/pkgconf.git	default	pkgconf-${VER}"
 )
