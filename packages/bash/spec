@@ -1,10 +1,10 @@
-VER=5.3
+VER=5.2.37
 SRCS=(
 	"tbl	https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz	default"
 	"git	https://github.com/AOSC-Dev/bash-config	bash-config.git	master"
 )
 CHKSUMS=(
-	"sha256 0d5cd86965f869a26cf64f4b71be7b96f90a3ba8b3d74e27e8e9d9d5550f31ba"
+	"sha256 a139c166df7ff4471c5e0733051642ee5556c1cc8a4a78f145583c5c81ab32fb"
 	"SKIP"
 )
 CHKUPDATE="anitya::id=166"
