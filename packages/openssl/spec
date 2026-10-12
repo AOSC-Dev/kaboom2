@@ -1,4 +1,4 @@
-VER=3.6.3
+VER=3.6.4
 SRCS=(
 	"tbl	https://github.com/openssl/openssl/releases/download/openssl-${VER}/openssl-${VER}.tar.gz	default"
 )
