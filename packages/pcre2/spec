@@ -1,4 +1,4 @@
-VER=10.46
+VER=10.48
 SRCS=(
 	"git	https://github.com/PCRE2Project/pcre2	default	tags/pcre2-${VER}"
 )
